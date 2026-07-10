@@ -6,6 +6,9 @@
   <title>Sofía Rojas Montoya - Portafolio e Innovación</title>
   <meta name="description" content="Hoja de vida interactiva de Sofía Rojas Montoya. Ingeniera Física y Especialista en Gestión de la Innovación. Liderazgo de proyectos STEAM, IA, IoT y transformación digital.">
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +21,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <!-- Animated Background Orbs -->
@@ -719,7 +722,33 @@
   <!-- Interactive Spotlight cursor glow -->
   <div class="cursor-glow" id="cursor-glow"></div>
 
+  <!-- Water/Crystal Lens Element -->
+  <div class="cursor-water-lens"></div>
+
+  <!-- High-performance Canvas for Lusion-style mouse interactions -->
+  <canvas id="interaction-canvas"></canvas>
+
+  <!-- SVG Filters for liquid effects -->
+  <svg style="position: absolute; width: 0; height: 0;" width="0" height="0">
+    <defs>
+      <!-- Crystal/Water ripple displacement filter -->
+      <filter id="crystal-distort">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" result="noise">
+          <animate attributeName="seed" from="1" to="100" dur="15s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      
+      <!-- Gooey liquid effect filter for canvas particles -->
+      <filter id="liquid-goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
+
   <!-- Script -->
-  <script src="script.js"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

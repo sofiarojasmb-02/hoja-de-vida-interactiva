@@ -410,21 +410,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     MOUSE TRACKING INTERACTION & PARTICLES (Pointer Events with Lerp Inertia)
+     MOUSE TRACKING INTERACTION & CANVAS PARTICLES (Lusion.co Style)
      ========================================================================== */
+  const canvas = document.getElementById('interaction-canvas');
+  const ctx = canvas.getContext('2d');
   const cursorGlow = document.getElementById('cursor-glow');
+  const waterLens = document.querySelector('.cursor-water-lens');
+  const displacementMap = document.querySelector('#crystal-distort feDisplacementMap');
+
+  let particles = [];
+  const mouse = {
+    x: null,
+    y: null,
+    active: false
+  };
+
+  // Background glow and water lens coordinates (Lerped for smooth dragging/fluid inertia)
   let targetX = 0;
   let targetY = 0;
   let currentX = 0;
   let currentY = 0;
+  let lensX = 0;
+  let lensY = 0;
+  
+  // SVG Distortion scale tracking
+  let currentScale = 25;
+  let targetScale = 25;
+  const BASELINE_SCALE = 22; // default idle ripple distortion scale
+  
   let isGlowActive = false;
-  let isMoving = false;
-  let lastSpawnTime = 0;
+  let isMovingGlow = false;
 
   function updateGlowPosition() {
-    if (!isMoving) return;
-
-    // Linear interpolation: current = current + (target - current) * ease
+    if (!isMovingGlow) return;
     const ease = 0.08;
     currentX += (targetX - currentX) * ease;
     currentY += (targetY - currentY) * ease;
@@ -434,91 +452,272 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const dist = Math.hypot(targetX - currentX, targetY - currentY);
-    // Keep animating if we are still far enough from target and cursor is inside window
     if (dist > 0.1 && isGlowActive) {
       requestAnimationFrame(updateGlowPosition);
     } else {
-      isMoving = false;
+      isMovingGlow = false;
     }
   }
 
-  function createParticle(x, y) {
-    const particle = document.createElement('span');
-    particle.className = 'mouse-particle';
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-
-    // Random direction and distance
-    const angle = Math.random() * Math.PI * 2;
-    const distance = 15 + Math.random() * 45;
-    const dx = Math.cos(angle) * distance;
-    const dy = Math.sin(angle) * distance;
-
-    particle.style.setProperty('--dx', `${dx}px`);
-    particle.style.setProperty('--dy', `${dy}px`);
-
-    // Random size (increased for more intensity)
-    const size = 8 + Math.random() * 10;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-
-    // Dynamic theme-aware colors: neon pink, gold, and cyan on dark theme; deep pink, amber, and cyan on light theme
-    const colors = ['var(--particle-color-1)', 'var(--particle-color-2)', 'var(--particle-color-3)'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    particle.style.backgroundColor = randomColor;
-    particle.style.boxShadow = `0 0 16px 4px ${randomColor}`;
-
-    document.body.appendChild(particle);
-
-    particle.addEventListener('animationend', () => {
-      particle.remove();
-    });
+  // Handle Canvas Resizing with high DPI support
+  function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.scale(dpr, dpr);
+    canvas.style.width = `${window.innerWidth}px`;
+    canvas.style.height = `${window.innerHeight}px`;
   }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
 
-  if (cursorGlow) {
-    document.addEventListener('pointermove', (e) => {
-      if (e.pointerType === 'mouse') {
-        if (!isGlowActive) {
-          cursorGlow.style.opacity = '1';
-          isGlowActive = true;
+  // Vibrant color palette matching both themes (neon tech colors)
+  const colors = [
+    '#6366f1', // Indigo
+    '#3b82f6', // Royal Blue
+    '#14b8a6', // Teal
+    '#ff007f', // Neon Pink
+    '#ffd700', // Gold
+    '#00f5ff'  // Cyan
+  ];
+
+  class Particle {
+    constructor(x, y, vx, vy, color) {
+      this.x = x;
+      this.y = y;
+      // Physics: add slight random spread to the velocity
+      this.vx = vx * 0.4 + (Math.random() - 0.5) * 1.5;
+      this.vy = vy * 0.4 + (Math.random() - 0.5) * 1.5;
+      this.size = Math.random() * 3 + 2; // radius
+      this.originalSize = this.size;
+      this.color = color;
+      this.life = 1.0;
+      this.decay = Math.random() * 0.015 + 0.01; // Fade speed
+      this.angle = Math.random() * Math.PI * 2;
+      this.spin = (Math.random() - 0.5) * 0.05;
+    }
+
+    update() {
+      // Swirl / Attraction effect to cursor (Lusion style)
+      if (mouse.active) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 180) {
+          // Gentle pull toward mouse
+          const force = (180 - dist) * 0.0003;
+          this.vx += dx * force;
+          this.vy += dy * force;
         }
-
-        targetX = e.clientX;
-        targetY = e.clientY;
-
-        if (!isMoving) {
-          currentX = targetX;
-          currentY = targetY;
-          isMoving = true;
-          updateGlowPosition();
-        }
-
-        // Spawn three particles at a time every 25ms for an extremely striking twinkling star trail
-        const now = Date.now();
-        if (now - lastSpawnTime > 25) {
-          createParticle(e.clientX, e.clientY);
-          createParticle(e.clientX, e.clientY);
-          createParticle(e.clientX, e.clientY);
-          lastSpawnTime = now;
-        }
-      } else {
-        cursorGlow.style.opacity = '0';
-        isGlowActive = false;
       }
-    });
 
-    document.addEventListener('pointerleave', () => {
-      cursorGlow.style.opacity = '0';
-      isGlowActive = false;
-      isMoving = false;
-    });
+      this.x += this.vx;
+      this.y += this.vy;
 
-    document.addEventListener('mouseleave', () => {
-      cursorGlow.style.opacity = '0';
-      isGlowActive = false;
-      isMoving = false;
-    });
+      // Friction / Drag
+      this.vx *= 0.96;
+      this.vy *= 0.96;
+
+      // Floating drift (slowly upwards)
+      this.vy -= 0.06;
+
+      // Spin rotation
+      this.angle += this.spin;
+
+      // Shrink & Fade
+      this.life -= this.decay;
+      this.size = Math.max(0.1, this.originalSize * this.life);
+    }
+
+    draw() {
+      ctx.save();
+      ctx.globalAlpha = this.life;
+      ctx.fillStyle = this.color;
+      
+      // Neon Glow Effect
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = this.color;
+
+      // Twinkling Star/Sparkle shape vs Circle
+      if (this.originalSize > 3.5 && Math.random() > 0.4) {
+        // Draw 4-pointed cross star
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.beginPath();
+        for (let i = 0; i < 4; i++) {
+          ctx.lineTo(0, -this.size * 2.2);
+          ctx.lineTo(this.size * 0.3, -this.size * 0.3);
+          ctx.rotate(Math.PI / 2);
+        }
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        // Draw standard round glowing particle
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
   }
+
+  // Animation Loop
+  function animate() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    // 1. Update and draw particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.update();
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      } else {
+        p.draw();
+      }
+    }
+
+    // Connect close particles (Mesh constellation effect)
+    if (particles.length > 0) {
+      ctx.save();
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+          if (dist < 90) {
+            const alpha = (1 - dist / 90) * 0.22 * Math.min(p1.life, p2.life);
+            ctx.strokeStyle = p1.color;
+            ctx.globalAlpha = alpha;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.restore();
+    }
+
+    // 2. Smoothly update Water/Crystal Lens Position (Lerp with slow dragging speed for liquid sensation)
+    if (mouse.active) {
+      const lensEase = 0.055; // Slower ease to create a heavy liquid/drag lag
+      lensX += (targetX - lensX) * lensEase;
+      lensY += (targetY - lensY) * lensEase;
+      if (waterLens) {
+        waterLens.style.transform = `translate(calc(${lensX}px - 50%), calc(${lensY}px - 50%))`;
+      }
+    }
+
+    // 3. Smoothly lerp the displacement scale distortion based on pointer speed
+    currentScale += (targetScale - currentScale) * 0.08;
+    if (displacementMap) {
+      displacementMap.setAttribute('scale', currentScale);
+    }
+    
+    // Slow decay of scale distortion back to baseline when mouse slows down
+    if (targetScale > BASELINE_SCALE) {
+      targetScale -= 0.3;
+    }
+
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  // Trigger burst of particles (Click / Tap)
+  function createBurst(x, y, count = 24) {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 1.5 + Math.random() * 4.5;
+      const vx = Math.cos(angle) * speed;
+      const vy = Math.sin(angle) * speed;
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      particles.push(new Particle(x, y, vx, vy, randomColor));
+    }
+  }
+
+  // Mouse / Pointer Event Listeners
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'mouse') {
+      // Show spotlight glow and water lens
+      if (!isGlowActive) {
+        cursorGlow.style.opacity = '1';
+        isGlowActive = true;
+      }
+      if (waterLens) {
+        waterLens.classList.add('active');
+      }
+
+      targetX = e.clientX;
+      targetY = e.clientY;
+
+      if (!isMovingGlow) {
+        currentX = targetX;
+        currentY = targetY;
+        // Initialize water lens coords to prevent sudden jump on entry
+        if (!mouse.active) {
+          lensX = targetX;
+          lensY = targetY;
+        }
+        isMovingGlow = true;
+        updateGlowPosition();
+      }
+
+      // Add particles for trail
+      const px = mouse.x ?? e.clientX;
+      const py = mouse.y ?? e.clientY;
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+
+      // Speed is the distance between previous and current pointer coordinate
+      const speedX = e.clientX - px;
+      const speedY = e.clientY - py;
+      const speed = Math.hypot(speedX, speedY);
+
+      // Dynamically increase water distortion scale based on movement speed
+      // More speed = larger displacement wave!
+      targetScale = BASELINE_SCALE + Math.min(45, speed * 1.1);
+
+      // Spawn particles proportional to mouse speed
+      const numToSpawn = Math.min(3, Math.floor(speed / 6) + 1);
+      for (let i = 0; i < numToSpawn; i++) {
+        const offsetX = (Math.random() - 0.5) * 6;
+        const offsetY = (Math.random() - 0.5) * 6;
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        particles.push(new Particle(e.clientX + offsetX, e.clientY + offsetY, speedX * 0.12, speedY * 0.12, randomColor));
+      }
+    } else {
+      cursorGlow.style.opacity = '0';
+      isGlowActive = false;
+      mouse.active = false;
+      if (waterLens) waterLens.classList.remove('active');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    // Generate particles
+    createBurst(e.clientX, e.clientY, 24);
+    
+    // Create a temporary water ripple shockwave: spikes the displacement map distortion
+    targetScale = 90;
+  });
+
+  document.addEventListener('pointerleave', () => {
+    cursorGlow.style.opacity = '0';
+    isGlowActive = false;
+    isMovingGlow = false;
+    mouse.active = false;
+    if (waterLens) waterLens.classList.remove('active');
+  });
+
+  document.addEventListener('mouseleave', () => {
+    cursorGlow.style.opacity = '0';
+    isGlowActive = false;
+    isMovingGlow = false;
+    mouse.active = false;
+    if (waterLens) waterLens.classList.remove('active');
+  });
 
   // Spotlight card effects
   const cards = document.querySelectorAll('.card, .contact-card');

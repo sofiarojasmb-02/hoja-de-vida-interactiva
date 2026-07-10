@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Gradient matching the website's accent colors -->
+    <linearGradient id="tech-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+    
+    <!-- Subtle glow filter to give it a modern, high-tech neon appearance -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Outer Rounded Hexagon representing structured innovation & engineering -->
+  <polygon points="256,45 435,148 435,364 256,467 77,364 77,148" 
+           fill="none" 
+           stroke="url(#tech-grad)" 
+           stroke-width="32" 
+           stroke-linejoin="round"
+           filter="url(#glow)" />
+           
+  <!-- Inner Atomic/Quantum orbits representing Physics & Tech -->
+  <ellipse cx="256" cy="256" rx="140" ry="55" 
+           fill="none" 
+           stroke="url(#tech-grad)" 
+           stroke-width="18" 
+           transform="rotate(30 256 256)" />
+           
+  <ellipse cx="256" cy="256" rx="140" ry="55" 
+           fill="none" 
+           stroke="url(#tech-grad)" 
+           stroke-width="18" 
+           transform="rotate(-30 256 256)" />
+           
+  <ellipse cx="256" cy="256" rx="140" ry="55" 
+           fill="none" 
+           stroke="url(#tech-grad)" 
+           stroke-width="18" 
+           transform="rotate(90 256 256)" />
+  
+  <!-- Central Nucleus representing energy, core innovation, and data -->
+  <circle cx="256" cy="256" r="44" fill="url(#tech-grad)" filter="url(#glow)" />
+  
+  <!-- Glowing Connection Nodes (Electrons/Circuit junctions) -->
+  <circle cx="256" cy="116" r="20" fill="#14b8a6" filter="url(#glow)" />
+  <circle cx="377" cy="326" r="20" fill="#6366f1" filter="url(#glow)" />
+  <circle cx="135" cy="326" r="20" fill="#3b82f6" filter="url(#glow)" />
+</svg>
