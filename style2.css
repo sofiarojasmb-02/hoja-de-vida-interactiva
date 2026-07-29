@@ -1423,3 +1423,62 @@ main, header, footer {
     white-space: nowrap;
   }
 }
+
+
+/* ==========================================================================
+   HERO COMPACT QUICK CONTACT CHIPS (BELOW CONTÁCTAME BUTTON)
+   ========================================================================== */
+.hero-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.quick-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-full);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+}
+
+.quick-chip.clickable:hover {
+  border-color: var(--rose-magenta);
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(213, 88, 137, 0.25);
+}
+
+.chip-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.chip-icon.icon-coral { color: var(--warm-coral); }
+.chip-icon.icon-rose { color: var(--rose-magenta); }
+.chip-icon.icon-gold { color: var(--warm-gold); }
+.chip-icon.icon-peach { color: var(--peach-amber); }
+
+@media (max-width: 768px) {
+  .hero-quick-chips {
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .quick-chip {
+    padding: 6px 13px;
+    font-size: 0.78rem;
+  }
+}
