@@ -1599,3 +1599,113 @@ a.hero-contact-btn:hover {
     font-size: 0.82rem;
   }
 }
+
+
+/* ==========================================================================
+   3D VOLUME & SPARKLE FLASH EFFECTS FOR PILLAR CARDS (NEXT TO ¿QUIÉN SOY?)
+   ========================================================================== */
+
+.pillar-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 22px;
+  background: linear-gradient(145deg, rgba(28, 18, 44, 0.85), rgba(16, 10, 26, 0.95));
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(213, 88, 137, 0.3);
+  border-bottom: 4px solid var(--rose-magenta);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 
+              0 4px 0 rgba(213, 88, 137, 0.3), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.35s ease, 
+              border-color 0.35s ease;
+  cursor: pointer;
+}
+
+/* Continuous Light Flash Beam Sweep (Destello) */
+.pillar-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 70%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.05) 70%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  animation: pillarFlashSweep 5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes pillarFlashSweep {
+  0% { left: -150%; opacity: 0; }
+  15% { opacity: 1; }
+  35% { left: 180%; opacity: 0; }
+  100% { left: 180%; opacity: 0; }
+}
+
+/* 3D Hover Lift & Neomorphism Glow */
+.pillar-card:hover {
+  transform: translateY(-8px) rotateX(4deg) scale(1.03);
+  border-color: var(--warm-coral);
+  border-bottom-color: var(--warm-gold);
+  box-shadow: 0 18px 35px rgba(213, 88, 137, 0.45), 
+              0 6px 0 var(--warm-coral), 
+              inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.pillar-card:hover::after {
+  animation: pillarFlashSweepHover 1.2s ease-in-out;
+}
+
+@keyframes pillarFlashSweepHover {
+  0% { left: -100%; opacity: 0.8; }
+  100% { left: 180%; opacity: 0; }
+}
+
+/* 3D Elevated Floating Icon */
+.pillar-card .about-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: var(--border-radius-md) !important;
+  background: linear-gradient(135deg, rgba(213, 88, 137, 0.3), rgba(255, 124, 110, 0.2)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.3rem !important;
+  box-shadow: 0 6px 15px rgba(213, 88, 137, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.pillar-card:hover .about-icon {
+  transform: scale(1.15) translateZ(15px);
+  background: var(--gradient-brand) !important;
+  box-shadow: 0 10px 22px rgba(235, 106, 124, 0.6) !important;
+}
+
+.pillar-card h4 {
+  font-family: var(--font-family-title);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.pillar-card:hover h4 {
+  color: var(--warm-gold) !important;
+}
