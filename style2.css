@@ -1744,3 +1744,159 @@ a.hero-contact-btn:hover {
   border-bottom-color: var(--warm-gold);
   box-shadow: 0 16px 32px rgba(213, 88, 137, 0.35), 0 5px 0 var(--warm-coral);
 }
+
+
+/* ==========================================================================
+   MOBILE HERO LAYOUT: PHOTO DIRECTLY NEXT TO NAME (SIDE-BY-SIDE)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "badge badge"
+      "title photo"
+      "subtitle subtitle"
+      "desc desc"
+      "actions actions"
+      "cards cards";
+    gap: 12px 14px;
+    align-items: center;
+  }
+
+  .badge-status {
+    grid-area: badge;
+    margin-bottom: 4px;
+    justify-self: start;
+  }
+
+  .hero-title {
+    grid-area: title;
+    font-size: 2.1rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+  }
+
+  .hero-image-container {
+    grid-area: photo;
+    margin: 0 !important;
+    justify-content: flex-end;
+    align-self: center;
+  }
+
+  .hero-image-wrapper {
+    width: 115px !important;
+    height: 115px !important;
+    border-radius: 20px !important;
+    border: 2px solid var(--rose-magenta) !important;
+    box-shadow: 0 8px 24px rgba(213, 88, 137, 0.4) !important;
+  }
+
+  .hero-subtitle {
+    grid-area: subtitle;
+    font-size: 1.05rem !important;
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+  }
+
+  .hero-description {
+    grid-area: desc;
+    font-size: 0.92rem !important;
+    margin-bottom: 16px !important;
+    text-align: left !important;
+  }
+
+  .hero-actions {
+    grid-area: actions;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .hero-contact-cards {
+    grid-area: cards;
+    width: 100%;
+    margin-top: 14px !important;
+  }
+
+  .hero-img-badge {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem !important;
+  }
+
+  .hero-image-wrapper {
+    width: 95px !important;
+    height: 95px !important;
+    border-radius: 16px !important;
+  }
+}
+
+
+/* ==========================================================================
+   HERO HEADER ROW: PHOTO DIRECTLY NEXT TO NAME ON MOBILE AND PC
+   ========================================================================== */
+.hero-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    display: block !important;
+  }
+
+  .hero-header-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-title {
+    font-size: 2.1rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-image-container {
+    margin: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .hero-image-wrapper {
+    width: 110px !important;
+    height: 110px !important;
+    border-radius: 20px !important;
+    border: 2px solid var(--rose-magenta) !important;
+    box-shadow: 0 8px 24px rgba(213, 88, 137, 0.4) !important;
+  }
+
+  .hero-img-badge {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+
+  .hero-image-wrapper {
+    width: 95px !important;
+    height: 95px !important;
+    border-radius: 16px !important;
+  }
+}
