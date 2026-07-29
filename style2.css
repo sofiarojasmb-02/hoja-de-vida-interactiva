@@ -1189,3 +1189,170 @@ main, header, footer {
   font-weight: 600;
   color: var(--text-primary);
 }
+
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE STYLES (100% RESPONSIVE FOR CELLPHONES)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-image-container {
+    margin: 0 auto;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .about-pillars {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(13, 8, 20, 0.95);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    transform: translateY(-150%);
+    transition: transform var(--transition-normal);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+  }
+
+  .btn-menu-toggle {
+    display: flex !important;
+  }
+
+  .nav-projects-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.15;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-image-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+
+  /* Timeline Mobile Alignment */
+  .timeline::after {
+    left: 16px;
+  }
+
+  .timeline-item {
+    padding-left: 45px;
+    margin-bottom: 30px;
+  }
+
+  .timeline-dot {
+    left: 9px;
+    top: 24px;
+  }
+
+  .timeline-card {
+    padding: 18px;
+  }
+
+  .timeline-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .role-title {
+    font-size: 1.1rem;
+  }
+
+  .location-badge {
+    align-self: flex-start;
+  }
+
+  .portfolio-filters {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+
+  .projects-grid, .skills-grid, .education-grid, .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-image-wrapper {
+    width: 210px;
+    height: 210px;
+  }
+
+  .timeline-item {
+    padding-left: 36px;
+  }
+
+  .timeline::after {
+    left: 12px;
+  }
+
+  .timeline-dot {
+    left: 5px;
+  }
+
+  .project-img-wrapper {
+    height: 180px;
+  }
+}
