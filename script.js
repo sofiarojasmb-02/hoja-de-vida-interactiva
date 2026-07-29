@@ -406,17 +406,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       backToTopBtn.style.opacity = '0';
       backToTopBtn.style.pointerEvents = 'none';
-    }
-  });
-
-  /* ==========================================================================
-     MOUSE TRACKING INTERACTION & CANVAS PARTICLES (Lusion.co Style)
+      /* ==========================================================================
+     MOUSE TRACKING INTERACTION & CANVAS PARTICLES
      ========================================================================== */
   const canvas = document.getElementById('interaction-canvas');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas ? canvas.getContext('2d') : null;
   const cursorGlow = document.getElementById('cursor-glow');
-  const waterLens = document.querySelector('.cursor-water-lens');
-  const displacementMap = document.querySelector('#crystal-distort feDisplacementMap');
 
   let particles = [];
   const mouse = {
@@ -425,18 +420,11 @@ document.addEventListener('DOMContentLoaded', () => {
     active: false
   };
 
-  // Background glow and water lens coordinates (Lerped for smooth dragging/fluid inertia)
+  // Background glow coordinates (Lerped for smooth movement)
   let targetX = 0;
   let targetY = 0;
   let currentX = 0;
   let currentY = 0;
-  let lensX = 0;
-  let lensY = 0;
-  
-  // SVG Distortion scale tracking
-  let currentScale = 25;
-  let targetScale = 25;
-  const BASELINE_SCALE = 22; // default idle ripple distortion scale
   
   let isGlowActive = false;
   let isMovingGlow = false;
@@ -461,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle Canvas Resizing with high DPI support
   function resizeCanvas() {
+    if (!canvas || !ctx) return;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
@@ -468,43 +457,42 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.style.width = `${window.innerWidth}px`;
     canvas.style.height = `${window.innerHeight}px`;
   }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+  if (canvas) {
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+  }
 
-  // Vibrant color palette matching both themes (neon tech colors)
+  // Pure shades of Blue for mouse trail sparkles and click bursts
   const colors = [
-    '#6366f1', // Indigo
-    '#3b82f6', // Royal Blue
-    '#14b8a6', // Teal
-    '#ff007f', // Neon Pink
-    '#ffd700', // Gold
-    '#00f5ff'  // Cyan
+    '#1ca7ec', // Vibrant Ocean Blue
+    '#38b6ff', // Electric Sky Blue
+    '#1e3096', // Royal Sapphire Blue
+    '#2563eb', // Pure Cobalt Blue
+    '#3b82f6', // Bright Royal Blue
+    '#60a5fa'  // Light Sky Blue
   ];
 
   class Particle {
     constructor(x, y, vx, vy, color) {
       this.x = x;
       this.y = y;
-      // Physics: add slight random spread to the velocity
       this.vx = vx * 0.4 + (Math.random() - 0.5) * 1.5;
       this.vy = vy * 0.4 + (Math.random() - 0.5) * 1.5;
-      this.size = Math.random() * 3 + 2; // radius
+      this.size = Math.random() * 3 + 2;
       this.originalSize = this.size;
       this.color = color;
       this.life = 1.0;
-      this.decay = Math.random() * 0.015 + 0.01; // Fade speed
+      this.decay = Math.random() * 0.015 + 0.01;
       this.angle = Math.random() * Math.PI * 2;
       this.spin = (Math.random() - 0.5) * 0.05;
     }
 
     update() {
-      // Swirl / Attraction effect to cursor (Lusion style)
       if (mouse.active) {
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const dist = Math.hypot(dx, dy);
         if (dist < 180) {
-          // Gentle pull toward mouse
           const force = (180 - dist) * 0.0003;
           this.vx += dx * force;
           this.vy += dy * force;
@@ -513,111 +501,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
       this.x += this.vx;
       this.y += this.vy;
-
-      // Friction / Drag
       this.vx *= 0.96;
       this.vy *= 0.96;
-
-      // Floating drift (slowly upwards)
-      this.vy -= 0.06;
-
-      // Spin rotation
       this.angle += this.spin;
-
-      // Shrink & Fade
       this.life -= this.decay;
-      this.size = Math.max(0.1, this.originalSize * this.life);
+      this.size = this.originalSize * Math.max(0, this.life);
     }
 
     draw() {
+      if (!ctx) return;
       ctx.save();
-      ctx.globalAlpha = this.life;
+      ctx.globalAlpha = Math.max(0, this.life);
       ctx.fillStyle = this.color;
-      
-      // Neon Glow Effect
       ctx.shadowBlur = 10;
       ctx.shadowColor = this.color;
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
 
-      // Twinkling Star/Sparkle shape vs Circle
-      if (this.originalSize > 3.5 && Math.random() > 0.4) {
-        // Draw 4-pointed cross star
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.beginPath();
-        for (let i = 0; i < 4; i++) {
-          ctx.lineTo(0, -this.size * 2.2);
-          ctx.lineTo(this.size * 0.3, -this.size * 0.3);
-          ctx.rotate(Math.PI / 2);
-        }
-        ctx.closePath();
-        ctx.fill();
-      } else {
-        // Draw standard round glowing particle
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      ctx.beginPath();
+      ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+      ctx.fill();
       ctx.restore();
     }
   }
 
-  // Animation Loop
+  // Animation Loop for 2D particles
   function animate() {
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    if (canvas && ctx) {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-    // 1. Update and draw particles
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-      p.update();
-      if (p.life <= 0) {
-        particles.splice(i, 1);
-      } else {
-        p.draw();
-      }
-    }
-
-    // Connect close particles (Mesh constellation effect)
-    if (particles.length > 0) {
-      ctx.save();
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i];
-          const p2 = particles[j];
-          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-          if (dist < 90) {
-            const alpha = (1 - dist / 90) * 0.22 * Math.min(p1.life, p2.life);
-            ctx.strokeStyle = p1.color;
-            ctx.globalAlpha = alpha;
-            ctx.lineWidth = 0.8;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+        } else {
+          p.draw();
         }
       }
-      ctx.restore();
-    }
 
-    // 2. Smoothly update Water/Crystal Lens Position (Lerp with slow dragging speed for liquid sensation)
-    if (mouse.active) {
-      const lensEase = 0.055; // Slower ease to create a heavy liquid/drag lag
-      lensX += (targetX - lensX) * lensEase;
-      lensY += (targetY - lensY) * lensEase;
-      if (waterLens) {
-        waterLens.style.transform = `translate(calc(${lensX}px - 50%), calc(${lensY}px - 50%))`;
+      if (particles.length > 0) {
+        ctx.save();
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const p1 = particles[i];
+            const p2 = particles[j];
+            const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+            if (dist < 90) {
+              const alpha = (1 - dist / 90) * 0.22 * Math.min(p1.life, p2.life);
+              ctx.strokeStyle = p1.color;
+              ctx.globalAlpha = alpha;
+              ctx.lineWidth = 0.8;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.restore();
       }
-    }
-
-    // 3. Smoothly lerp the displacement scale distortion based on pointer speed
-    currentScale += (targetScale - currentScale) * 0.08;
-    if (displacementMap) {
-      displacementMap.setAttribute('scale', currentScale);
-    }
-    
-    // Slow decay of scale distortion back to baseline when mouse slows down
-    if (targetScale > BASELINE_SCALE) {
-      targetScale -= 0.3;
     }
 
     requestAnimationFrame(animate);
@@ -639,13 +582,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mouse / Pointer Event Listeners
   document.addEventListener('pointermove', (e) => {
     if (e.pointerType === 'mouse') {
-      // Show spotlight glow and water lens
-      if (!isGlowActive) {
+      if (cursorGlow && !isGlowActive) {
         cursorGlow.style.opacity = '1';
         isGlowActive = true;
-      }
-      if (waterLens) {
-        waterLens.classList.add('active');
       }
 
       targetX = e.clientX;
@@ -654,32 +593,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isMovingGlow) {
         currentX = targetX;
         currentY = targetY;
-        // Initialize water lens coords to prevent sudden jump on entry
-        if (!mouse.active) {
-          lensX = targetX;
-          lensY = targetY;
-        }
         isMovingGlow = true;
         updateGlowPosition();
       }
 
-      // Add particles for trail
       const px = mouse.x ?? e.clientX;
       const py = mouse.y ?? e.clientY;
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       mouse.active = true;
 
-      // Speed is the distance between previous and current pointer coordinate
       const speedX = e.clientX - px;
       const speedY = e.clientY - py;
       const speed = Math.hypot(speedX, speedY);
 
-      // Dynamically increase water distortion scale based on movement speed
-      // More speed = larger displacement wave!
-      targetScale = BASELINE_SCALE + Math.min(45, speed * 1.1);
-
-      // Spawn particles proportional to mouse speed
       const numToSpawn = Math.min(3, Math.floor(speed / 6) + 1);
       for (let i = 0; i < numToSpawn; i++) {
         const offsetX = (Math.random() - 0.5) * 6;
@@ -688,35 +615,30 @@ document.addEventListener('DOMContentLoaded', () => {
         particles.push(new Particle(e.clientX + offsetX, e.clientY + offsetY, speedX * 0.12, speedY * 0.12, randomColor));
       }
     } else {
-      cursorGlow.style.opacity = '0';
+      if (cursorGlow) cursorGlow.style.opacity = '0';
       isGlowActive = false;
       mouse.active = false;
-      if (waterLens) waterLens.classList.remove('active');
     }
   });
 
   document.addEventListener('click', (e) => {
-    // Generate particles
     createBurst(e.clientX, e.clientY, 24);
-    
-    // Create a temporary water ripple shockwave: spikes the displacement map distortion
-    targetScale = 90;
   });
 
   document.addEventListener('pointerleave', () => {
-    cursorGlow.style.opacity = '0';
+    if (cursorGlow) cursorGlow.style.opacity = '0';
     isGlowActive = false;
     isMovingGlow = false;
     mouse.active = false;
-    if (waterLens) waterLens.classList.remove('active');
   });
 
   document.addEventListener('mouseleave', () => {
-    cursorGlow.style.opacity = '0';
+    if (cursorGlow) cursorGlow.style.opacity = '0';
     isGlowActive = false;
     isMovingGlow = false;
     mouse.active = false;
-    if (waterLens) waterLens.classList.remove('active');
+  });
+    }
   });
 
   // Spotlight card effects
@@ -734,4 +656,554 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  /* ==========================================================================
+     THREE.JS + ANIME.JS 3D ADAPTER & INTERACTIVE GRAPHICS ENGINE
+     ========================================================================== */
+  function initThreeAnimeJS() {
+    const canvas = document.getElementById('three-bg-canvas');
+    if (!canvas || typeof THREE === 'undefined' || typeof anime === 'undefined') return;
+
+    // 1. Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 28); // Positioned close to hero section
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // 2. Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    scene.add(ambientLight);
+
+    const pointLight1 = new THREE.PointLight(0x797ef6, 2.5, 100); // Paleta_2 Electric Indigo
+    pointLight1.position.set(20, 20, 20);
+    scene.add(pointLight1);
+
+    const pointLight2 = new THREE.PointLight(0x4adee0, 2.5, 100); // Paleta_2 Neon Aqua
+    pointLight2.position.set(-20, -20, 15);
+    scene.add(pointLight2);
+
+    const pointLight3 = new THREE.PointLight(0x1ca7ec, 2.0, 80); // Paleta_2 Ocean Blue
+    pointLight3.position.set(0, 15, -10);
+    scene.add(pointLight3);
+
+    // 3. Central 3D Atomic Nucleus & Orbits (Inspired by Sofía's Favicon & Paleta_2)
+    const atomicGroup = new THREE.Group();
+
+    // Outer Hexagon
+    const hexShape = new THREE.Shape();
+    const hexRadius = 9;
+    for (let i = 0; i < 6; i++) {
+      const angle = (i * Math.PI) / 3;
+      const x = hexRadius * Math.cos(angle);
+      const y = hexRadius * Math.sin(angle);
+      if (i === 0) hexShape.moveTo(x, y);
+      else hexShape.lineTo(x, y);
+    }
+    hexShape.closePath();
+
+    const hexPoints = hexShape.getPoints();
+    const hexGeometry = new THREE.BufferGeometry().setFromPoints(hexPoints);
+    const hexMaterial = new THREE.LineBasicMaterial({ color: 0x1ca7ec, linewidth: 2 });
+    const hexLine = new THREE.LineLoop(hexGeometry, hexMaterial);
+    atomicGroup.add(hexLine);
+
+    // 3 Atomic Orbits with Paleta_2 Colors
+    const orbitGeom = new THREE.TorusGeometry(6, 0.08, 16, 100);
+    const orbitMat1 = new THREE.MeshStandardMaterial({ color: 0x797ef6, roughness: 0.2, metalness: 0.8 }); // Electric Indigo
+    const orbitMat2 = new THREE.MeshStandardMaterial({ color: 0x1e3096, roughness: 0.2, metalness: 0.8 }); // Sapphire Blue
+    const orbitMat3 = new THREE.MeshStandardMaterial({ color: 0x4adee0, roughness: 0.2, metalness: 0.8 }); // Neon Aqua
+
+    const orbit1 = new THREE.Mesh(orbitGeom, orbitMat1);
+    orbit1.rotation.x = Math.PI / 3;
+    orbit1.rotation.y = Math.PI / 6;
+
+    const orbit2 = new THREE.Mesh(orbitGeom, orbitMat2);
+    orbit2.rotation.x = -Math.PI / 3;
+    orbit2.rotation.y = -Math.PI / 6;
+
+    const orbit3 = new THREE.Mesh(orbitGeom, orbitMat3);
+    orbit3.rotation.y = Math.PI / 2;
+
+    atomicGroup.add(orbit1, orbit2, orbit3);
+
+    // Central Nucleus
+    const nucleusGeom = new THREE.SphereGeometry(1.6, 32, 32);
+    const nucleusMat = new THREE.MeshStandardMaterial({
+      color: 0x4adee0,
+      emissive: 0x4adee0,
+      emissiveIntensity: 0.6,
+      roughness: 0.1
+    });
+    const nucleus = new THREE.Mesh(nucleusGeom, nucleusMat);
+    atomicGroup.add(nucleus);
+
+    // 3 Floating Electrons
+    const electronGeom = new THREE.SphereGeometry(0.45, 16, 16);
+    const electronMat = new THREE.MeshStandardMaterial({ color: 0x7fd3ed, emissive: 0x7fd3ed, emissiveIntensity: 0.8 });
+
+    const electron1 = new THREE.Mesh(electronGeom, electronMat);
+    const electron2 = new THREE.Mesh(electronGeom, electronMat);
+    const electron3 = new THREE.Mesh(electronGeom, electronMat);
+    atomicGroup.add(electron1, electron2, electron3);
+
+    // Prominent placement right at the top (Hero Section)
+    atomicGroup.position.set(3, 0, 4);
+    atomicGroup.scale.set(1.2, 1.2, 1.2);
+    scene.add(atomicGroup);
+
+    // 4. Multi-Layer Instanced & Batched Meshes (Anime.js Instanced Mesh Adapter System with Paleta_2)
+    const primaryCount = 144; // 12x12 Grid Matrix
+    const secondaryCount = 64; // 8x8 Background Orbit Matrix
+
+    // Geometries & Materials
+    const primaryGeom = new THREE.OctahedronGeometry(0.55, 0);
+    const primaryMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.25,
+      metalness: 0.8
+    });
+    const instancedMeshPrimary = new THREE.InstancedMesh(primaryGeom, primaryMat, primaryCount);
+
+    const secondaryGeom = new THREE.TorusGeometry(0.4, 0.12, 12, 24);
+    const secondaryMat = new THREE.MeshStandardMaterial({
+      color: 0x1ca7ec,
+      roughness: 0.2,
+      metalness: 0.9,
+      wireframe: true
+    });
+    const instancedMeshSecondary = new THREE.InstancedMesh(secondaryGeom, secondaryMat, secondaryCount);
+
+    const dummy = new THREE.Object3D();
+    const colorHelper = new THREE.Color();
+
+    // Monochromatic Gama de Azules Definition: #0c1954, #1e3096, #1ca7ec, #38b6ff, #7fd3ed
+    const paletteHex = [0x0c1954, 0x1e3096, 0x1ca7ec, 0x38b6ff, 0x7fd3ed];
+
+    // Build Per-Instance Proxies Array (getInstances pattern)
+    const primaryProxies = [];
+    const colsP = 12;
+    const rowsP = 12;
+
+    for (let i = 0; i < primaryCount; i++) {
+      const ix = i % colsP;
+      const iy = Math.floor(i / colsP);
+
+      const baseX = (ix - colsP / 2 + 0.5) * 4.2;
+      const baseY = (iy - rowsP / 2 + 0.5) * 3.6;
+      const baseZ = (Math.random() - 0.5) * 8 + 2; // Brought forward for hero visibility
+
+      const baseScale = 0.6 + Math.random() * 0.5;
+      const initialHex = paletteHex[i % paletteHex.length];
+      const baseColor = new THREE.Color(initialHex);
+
+      const proxy = {
+        id: i,
+        gridX: ix,
+        gridY: iy,
+        baseX: baseX, baseY: baseY, baseZ: baseZ,
+        x: baseX, y: baseY, z: baseZ,
+        rx: Math.random() * Math.PI,
+        ry: Math.random() * Math.PI,
+        rz: 0,
+        scale: baseScale,
+        baseScale: baseScale,
+        r: baseColor.r,
+        g: baseColor.g,
+        b: baseColor.b
+      };
+
+      primaryProxies.push(proxy);
+
+      // Set initial state
+      dummy.position.set(proxy.x, proxy.y, proxy.z);
+      dummy.rotation.set(proxy.rx, proxy.ry, proxy.rz);
+      dummy.scale.setScalar(proxy.scale);
+      dummy.updateMatrix();
+      instancedMeshPrimary.setMatrixAt(i, dummy.matrix);
+      instancedMeshPrimary.setColorAt(i, baseColor);
+    }
+    instancedMeshPrimary.instanceMatrix.needsUpdate = true;
+    if (instancedMeshPrimary.instanceColor) instancedMeshPrimary.instanceColor.needsUpdate = true;
+    scene.add(instancedMeshPrimary);
+
+    // Build Secondary Batched Background Proxies
+    const secondaryProxies = [];
+    const colsS = 8;
+    const rowsS = 8;
+
+    for (let j = 0; j < secondaryCount; j++) {
+      const sx = (j % colsS - colsS / 2 + 0.5) * 7;
+      const sy = (Math.floor(j / colsS) - rowsS / 2 + 0.5) * 6;
+      const sz = (Math.random() - 0.5) * 16 - 18;
+      const sScale = 0.5 + Math.random() * 0.4;
+
+      const proxyS = {
+        id: j,
+        baseX: sx, baseY: sy, baseZ: sz,
+        x: sx, y: sy, z: sz,
+        rx: Math.random() * Math.PI,
+        ry: Math.random() * Math.PI,
+        scale: sScale,
+        baseScale: sScale
+      };
+      secondaryProxies.push(proxyS);
+
+      dummy.position.set(proxyS.x, proxyS.y, proxyS.z);
+      dummy.rotation.set(proxyS.rx, proxyS.ry, 0);
+      dummy.scale.setScalar(proxyS.scale);
+      dummy.updateMatrix();
+      instancedMeshSecondary.setMatrixAt(j, dummy.matrix);
+    }
+    instancedMeshSecondary.instanceMatrix.needsUpdate = true;
+    scene.add(instancedMeshSecondary);
+
+    // Universal Commit / Flush function for Instanced Mesh matrices & colors
+    function commitInstancedMeshChanges() {
+      // Primary InstancedMesh
+      for (let i = 0; i < primaryCount; i++) {
+        const p = primaryProxies[i];
+        dummy.position.set(p.x, p.y, p.z);
+        dummy.rotation.set(p.rx, p.ry, p.rz);
+        dummy.scale.setScalar(p.scale);
+        dummy.updateMatrix();
+        instancedMeshPrimary.setMatrixAt(i, dummy.matrix);
+
+        colorHelper.setRGB(p.r, p.g, p.b);
+        instancedMeshPrimary.setColorAt(i, colorHelper);
+      }
+      instancedMeshPrimary.instanceMatrix.needsUpdate = true;
+      if (instancedMeshPrimary.instanceColor) instancedMeshPrimary.instanceColor.needsUpdate = true;
+
+      // Secondary InstancedMesh
+      for (let j = 0; j < secondaryCount; j++) {
+        const s = secondaryProxies[j];
+        dummy.position.set(s.x, s.y, s.z);
+        dummy.rotation.set(s.rx, s.ry, 0);
+        dummy.scale.setScalar(s.scale);
+        dummy.updateMatrix();
+        instancedMeshSecondary.setMatrixAt(j, dummy.matrix);
+      }
+      instancedMeshSecondary.instanceMatrix.needsUpdate = true;
+    }
+
+    // 5. Anime.js Instanced Adapter Stagger Animations with Gama de Azules
+    // 5a. Staggered Wave Motion across 12x12 Grid Matrix
+    anime({
+      targets: primaryProxies,
+      y: function(target, index) {
+        return target.baseY + Math.sin(index * 0.35) * 2.2;
+      },
+      z: function(target, index) {
+        return target.baseZ + Math.cos(index * 0.25) * 3.5;
+      },
+      rx: function() { return Math.PI * 2; },
+      ry: function() { return Math.PI * 2; },
+      delay: anime.stagger(25, { grid: [12, 12], from: 'center' }),
+      duration: 3800,
+      direction: 'alternate',
+      loop: true,
+      easing: 'easeInOutSine',
+      update: commitInstancedMeshChanges
+    });
+
+    // 5b. Color Morphing Stagger Wave strictly within Gama de Azules (#1ca7ec, #38b6ff, #1e3096, #0c1954)
+    const colorOcean = new THREE.Color(0x1ca7ec);
+    const colorSky = new THREE.Color(0x38b6ff);
+    const colorSapphire = new THREE.Color(0x1e3096);
+    const colorNavy = new THREE.Color(0x0c1954);
+
+    anime({
+      targets: primaryProxies,
+      r: [
+        { value: colorOcean.r, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorSky.r, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorSapphire.r, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorNavy.r, duration: 2500, easing: 'easeInOutQuad' }
+      ],
+      g: [
+        { value: colorOcean.g, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorSky.g, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorSapphire.g, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorNavy.g, duration: 2500, easing: 'easeInOutQuad' }
+      ],
+      b: [
+        { value: colorOcean.b, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorSky.b, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorSapphire.b, duration: 2500, easing: 'easeInOutQuad' },
+        { value: colorNavy.b, duration: 2500, easing: 'easeInOutQuad' }
+      ],
+      delay: anime.stagger(30, { grid: [12, 12], from: 'first' }),
+      direction: 'alternate',
+      loop: true,
+      update: commitInstancedMeshChanges
+    });
+
+    // 5c. Secondary Background Orbit Rotation
+    anime({
+      targets: secondaryProxies,
+      rx: function() { return Math.PI * 4; },
+      ry: function() { return Math.PI * 4; },
+      delay: anime.stagger(40, { from: 'center' }),
+      duration: 18000,
+      loop: true,
+      easing: 'linear',
+      update: commitInstancedMeshChanges
+    });
+
+    // Orbit Rotation Loop via Anime.js
+    anime({
+      targets: [orbit1.rotation, orbit2.rotation, orbit3.rotation],
+      z: Math.PI * 2,
+      duration: 12000,
+      loop: true,
+      easing: 'linear'
+    });
+
+    anime({
+      targets: atomicGroup.rotation,
+      y: Math.PI * 2,
+      duration: 25000,
+      loop: true,
+      easing: 'linear'
+    });
+
+    // 6. Interactive Mouse Motion & Proximity Displace
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      // Mouse Proximity calculation for Instanced Mesh Proxies
+      const mouse3D = new THREE.Vector3(targetMouseX * 18, -targetMouseY * 12, 0);
+
+      primaryProxies.forEach((p) => {
+        const dx = p.x - mouse3D.x;
+        const dy = p.y - mouse3D.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 6) {
+          const factor = (1 - dist / 6);
+          p.scale = p.baseScale + factor * 1.2;
+          p.rz = factor * Math.PI;
+        } else {
+          p.scale = p.baseScale;
+          p.rz = 0;
+        }
+      });
+      commitInstancedMeshChanges();
+
+      // Animate Camera & Group subtly with Anime.js
+      anime({
+        targets: atomicGroup.rotation,
+        x: targetMouseY * 0.3,
+        y: targetMouseX * 0.5,
+        duration: 1200,
+        easing: 'easeOutCubic'
+      });
+
+      anime({
+        targets: instancedMeshPrimary.rotation,
+        x: -targetMouseY * 0.15,
+        y: targetMouseX * 0.15,
+        duration: 1500,
+        easing: 'easeOutQuad'
+      });
+    });
+
+    // 7. Interactive Click Wave Shockwave (Grid Radial Stagger)
+    window.addEventListener('click', () => {
+      anime({
+        targets: primaryProxies,
+        scale: [
+          { value: function(target) { return target.baseScale * 2.5; }, duration: 400, easing: 'easeOutQuad' },
+          { value: function(target) { return target.baseScale; }, duration: 900, easing: 'easeOutElastic(1, .5)' }
+        ],
+        z: [
+          { value: function(target) { return target.baseZ + 9; }, duration: 400, easing: 'easeOutQuad' },
+          { value: function(target) { return target.baseZ; }, duration: 900, easing: 'easeOutCubic' }
+        ],
+        delay: anime.stagger(20, { grid: [12, 12], from: 'center' }),
+        update: commitInstancedMeshChanges
+      });
+
+      // Pulse Nucleus
+      anime({
+        targets: nucleus.scale,
+        x: [1, 1.8, 1],
+        y: [1, 1.8, 1],
+        z: [1, 1.8, 1],
+        duration: 800,
+        easing: 'easeOutElastic(1, .5)'
+      });
+    });
+
+    // 8. Scroll-Triggered Instanced Mesh Morphing
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrollPos / (docHeight || 1);
+
+      // Rotate and adjust camera position on scroll
+      camera.position.z = 35 + scrollPercent * 10;
+      camera.position.y = -scrollPercent * 8;
+      
+      // Move atomic group & morph instanced meshes depending on scroll section
+      const activeSection = Array.from(sections).find(sec => {
+        const rect = sec.getBoundingClientRect();
+        return rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5;
+      });
+
+      if (activeSection) {
+        const secId = activeSection.getAttribute('id');
+        if (secId === 'hero') {
+          anime({ targets: atomicGroup.position, x: 3, y: 0, z: 4, duration: 1000, easing: 'easeOutCubic' });
+          anime({ targets: atomicGroup.scale, x: 1.2, y: 1.2, z: 1.2, duration: 1000, easing: 'easeOutCubic' });
+          anime({
+            targets: primaryProxies,
+            x: function(target) { return target.baseX; },
+            y: function(target) { return target.baseY; },
+            z: function(target) { return target.baseZ; },
+            delay: anime.stagger(10, { grid: [12, 12], from: 'center' }),
+            duration: 1000,
+            easing: 'easeOutCubic',
+            update: commitInstancedMeshChanges
+          });
+        } else if (secId === 'about') {
+          anime({ targets: atomicGroup.position, x: -14, y: 0, z: -5, duration: 1000, easing: 'easeOutCubic' });
+          anime({ targets: atomicGroup.scale, x: 0.8, y: 0.8, z: 0.8, duration: 1000, easing: 'easeOutCubic' });
+          // Morph primary proxies into orbital ring formation
+          anime({
+            targets: primaryProxies,
+            x: function(target, index) {
+              const angle = (index / primaryCount) * Math.PI * 4;
+              return Math.cos(angle) * (14 + Math.sin(index) * 2);
+            },
+            y: function(target, index) {
+              const angle = (index / primaryCount) * Math.PI * 4;
+              return Math.sin(angle) * (14 + Math.cos(index) * 2);
+            },
+            delay: anime.stagger(12, { from: 'center' }),
+            duration: 1200,
+            easing: 'easeOutCubic',
+            update: commitInstancedMeshChanges
+          });
+        } else if (secId === 'experience') {
+          anime({ targets: atomicGroup.position, x: 14, y: -2, z: -8, duration: 1000, easing: 'easeOutCubic' });
+          anime({ targets: atomicGroup.scale, x: 0.7, y: 0.7, z: 0.7, duration: 1000, easing: 'easeOutCubic' });
+          // Morph primary proxies into dual timeline columns
+          anime({
+            targets: primaryProxies,
+            x: function(target, index) {
+              return (index % 2 === 0 ? -16 : 16) + (Math.random() - 0.5) * 2;
+            },
+            y: function(target, index) {
+              return (Math.floor(index / 2) - primaryCount / 4) * 0.5;
+            },
+            delay: anime.stagger(10, { from: 'first' }),
+            duration: 1200,
+            easing: 'easeOutCubic',
+            update: commitInstancedMeshChanges
+          });
+        } else if (secId === 'skills') {
+          anime({ targets: atomicGroup.position, x: 0, y: 4, z: -2, duration: 1000, easing: 'easeOutCubic' });
+          anime({ targets: atomicGroup.scale, x: 0.9, y: 0.9, z: 0.9, duration: 1000, easing: 'easeOutCubic' });
+          // Reset to grid formation
+          anime({
+            targets: primaryProxies,
+            x: function(target) { return target.baseX; },
+            y: function(target) { return target.baseY; },
+            z: function(target) { return target.baseZ; },
+            delay: anime.stagger(15, { grid: [12, 12], from: 'center' }),
+            duration: 1200,
+            easing: 'easeOutCubic',
+            update: commitInstancedMeshChanges
+          });
+        } else if (secId === 'contact') {
+          anime({ targets: atomicGroup.position, x: 0, y: -4, z: -5, duration: 1000, easing: 'easeOutCubic' });
+          anime({ targets: atomicGroup.scale, x: 0.75, y: 0.75, z: 0.75, duration: 1000, easing: 'easeOutCubic' });
+        }
+      }
+    });
+
+    // 9. Anime.js 3D Spring Tilt Effects on Portfolio Cards
+    const interactiveCards = document.querySelectorAll('.card, .experience-card, .skill-card, .education-card, .ref-card');
+    interactiveCards.forEach(card => {
+      card.style.transformStyle = 'preserve-3d';
+      
+      card.addEventListener('mouseenter', () => {
+        anime.remove(card);
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateX = ((y / rect.height) - 0.5) * -14;
+        const rotateY = ((x / rect.width) - 0.5) * 14;
+
+        anime({
+          targets: card,
+          rotateX: rotateX,
+          rotateY: rotateY,
+          scale: 1.025,
+          duration: 200,
+          easing: 'easeOutQuad'
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        anime({
+          targets: card,
+          rotateX: 0,
+          rotateY: 0,
+          scale: 1,
+          duration: 800,
+          easing: 'easeOutElastic(1, .5)'
+        });
+      });
+    });
+
+    // 10. Animation Render Loop
+    let clock = new THREE.Clock();
+    function animateScene() {
+      requestAnimationFrame(animateScene);
+
+      const elapsedTime = clock.getElapsedTime();
+
+      // Electron orbits
+      electron1.position.x = Math.cos(elapsedTime * 2) * 6;
+      electron1.position.y = Math.sin(elapsedTime * 2) * 6;
+
+      electron2.position.x = Math.cos(elapsedTime * 2.5 + 2) * 6;
+      electron2.position.z = Math.sin(elapsedTime * 2.5 + 2) * 6;
+
+      electron3.position.y = Math.cos(elapsedTime * 1.8 + 4) * 6;
+      electron3.position.z = Math.sin(elapsedTime * 1.8 + 4) * 6;
+
+      renderer.render(scene, camera);
+    }
+
+    animateScene();
+
+    // Window Resize Handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+  }
+
+  // Initialize Three.js + Anime.js system
+  initThreeAnimeJS();
 });

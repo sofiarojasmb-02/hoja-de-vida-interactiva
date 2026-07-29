@@ -45,10 +45,10 @@
   --side-gradient-color: rgba(139, 92, 246, 0.15);
   --bg-gradient: radial-gradient(circle at 50% 0%, #180d2d 0%, #0e091b 50%, #090d16 100%);
   
-  /* Particle Sparkle Colors (Dark Theme - Glowing Neon) */
-  --particle-color-1: #ff007f; /* Neon Pink */
-  --particle-color-2: #ffd700; /* Neon Gold */
-  --particle-color-3: #00f5ff; /* Neon Cyan */
+  /* Particle Sparkle Colors (Gama de Azules) */
+  --particle-color-1: #1ca7ec; /* Vibrant Ocean Blue */
+  --particle-color-2: #38b6ff; /* Electric Sky Blue */
+  --particle-color-3: #1e3096; /* Sapphire Blue */
 }
 
 /* Light Theme Overrides */
@@ -81,10 +81,10 @@
   --side-gradient-color: rgba(139, 92, 246, 0.05);
   --bg-gradient: radial-gradient(circle at 50% 0%, #f4efff 0%, #faf8ff 50%, #f8fafc 100%);
 
-  /* Particle Sparkle Colors (Light Theme - Rich High Contrast) */
-  --particle-color-1: #db2777; /* Deep Pink */
-  --particle-color-2: #d97706; /* Deep Amber */
-  --particle-color-3: #0891b2; /* Deep Cyan */
+  /* Particle Sparkle Colors (Gama de Azules) */
+  --particle-color-1: #1ca7ec; /* Vibrant Ocean Blue */
+  --particle-color-2: #38b6ff; /* Electric Sky Blue */
+  --particle-color-3: #1e3096; /* Sapphire Blue */
 }
 
 /* ==========================================================================
@@ -356,6 +356,60 @@ button, input, textarea {
 }
 
 /* ==========================================================================
+   THREE.JS 3D CANVAS & ANIMATION SYSTEM
+   ========================================================================== */
+
+#three-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Placed at layer 0, above body background, right beneath page content */
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity var(--transition-normal);
+}
+
+[data-theme="light"] #three-bg-canvas {
+  opacity: 0.85;
+}
+
+/* Semi-transparent Backdrop Overlay separating 3D background from text and content */
+.bg-overlay-filter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, rgba(9, 13, 22, 0.42) 0%, rgba(9, 13, 22, 0.78) 100%);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  transition: background var(--transition-normal);
+}
+
+[data-theme="light"] .bg-overlay-filter {
+  background: radial-gradient(circle at 50% 30%, rgba(248, 250, 252, 0.45) 0%, rgba(248, 250, 252, 0.8) 100%);
+}
+
+#interaction-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+}
+
+main, header, footer {
+  position: relative;
+  z-index: 1; /* Floats directly above the 3D background canvas */
+}
+
+/* ==========================================================================
    BACKGROUND ANIMATION (ORBS)
    ========================================================================== */
 
@@ -381,7 +435,7 @@ button, input, textarea {
   left: 0;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(28, 167, 236, 0.18) 0%, transparent 70%);
   border-radius: var(--border-radius-full);
   pointer-events: none;
   transform: translate(-50%, -50%);
@@ -392,7 +446,7 @@ button, input, textarea {
 }
 
 [data-theme="light"] .cursor-glow {
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(28, 167, 236, 0.08) 0%, transparent 70%);
 }
 
 .orb-1 {
@@ -475,6 +529,20 @@ button, input, textarea {
   font-weight: 800;
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.nav-logo-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: transform var(--transition-normal), filter var(--transition-normal);
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.4));
+}
+
+.nav-logo:hover .nav-logo-icon {
+  transform: rotate(12deg) scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.6));
 }
 
 .logo-dot {
@@ -498,6 +566,24 @@ button, input, textarea {
 
 .nav-link:hover, .nav-link.active {
   color: var(--text-primary);
+}
+
+.nav-link.nav-projects-btn {
+  padding: 8px 18px !important;
+  background: var(--gradient-accent);
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: var(--border-radius-full);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-normal);
+}
+
+.nav-link.nav-projects-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.55);
 }
 
 .nav-link::after {
