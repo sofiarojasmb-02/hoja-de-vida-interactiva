@@ -330,12 +330,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 
-  document.addEventListener('touchstart', (e) => {
-    if (e.touches && e.touches.length > 0) {
-      const touch = e.touches[0];
-      handlePointerOrTouch(touch.clientX, touch.clientY);
+  // 6. Horizontal Phone Carousel Controls & Drag Handler
+  const phoneCarousel = document.getElementById('phone-carousel');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  if (phoneCarousel) {
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        phoneCarousel.scrollBy({ left: -320, behavior: 'smooth' });
+      });
     }
-  }, { passive: true });
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        phoneCarousel.scrollBy({ left: 320, behavior: 'smooth' });
+      });
+    }
+
+    // Drag-to-scroll for Desktop Mouse
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    phoneCarousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      phoneCarousel.classList.add('active');
+      startX = e.pageX - phoneCarousel.offsetLeft;
+      scrollLeft = phoneCarousel.scrollLeft;
+    });
+
+    phoneCarousel.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    phoneCarousel.addEventListener('mouseup', () => {
+      isDown = false;
+    });
+
+    phoneCarousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - phoneCarousel.offsetLeft;
+      const walk = (x - startX) * 2;
+      phoneCarousel.scrollLeft = scrollLeft - walk;
+    });
+  }
 });
 
 // Helper function to switch main project image when clicking mini thumbnails

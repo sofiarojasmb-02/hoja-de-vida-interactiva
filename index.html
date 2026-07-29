@@ -62,6 +62,7 @@
         <a href="#education" class="nav-link">Formación</a>
         <a href="#references" class="nav-link">Referencias</a>
         <a href="#contact" class="nav-link">Contacto</a>
+        <a href="#proyectos-personales" class="nav-link" style="color: var(--warm-gold); font-weight: 600;">Proyectos Personales</a>
       </nav>
 
       <div class="nav-actions">
@@ -70,6 +71,11 @@
           <i data-lucide="sun" class="icon-sun"></i>
           <i data-lucide="moon" class="icon-moon"></i>
         </button>
+        <!-- Portafolio Proyectos Button -->
+        <a href="#proyectos-personales" class="btn btn-outline btn-sm nav-projects-btn">
+          <i data-lucide="folder-git-2"></i>
+          <span>Portafolio Proyectos</span>
+        </a>
         <!-- Download CV -->
         <a href="CV_SofiaRojasM_Final.pdf" download class="btn btn-primary btn-sm btn-download">
           <i data-lucide="download"></i>
@@ -647,6 +653,167 @@
                 <span>Enviar Mensaje</span>
               </button>
             </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Personal Projects Portfolio Section (Smartphone Mockup Carousel) -->
+    <section id="proyectos-personales" class="section-padding">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-pretitle">Desarrollo & Tecnología</span>
+          <h2 class="section-title">Portafolio Proyectos Personales</h2>
+          <p style="color: var(--text-secondary); max-width: 650px; margin: 10px auto 0 auto; font-size: 0.95rem;">
+            Plataformas web interactivas, simuladores 3D/AR, analítica de datos y aplicaciones móviles diseñadas con la Cuarta Revolución Industrial.
+          </p>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="carousel-controls">
+          <button class="carousel-nav-btn" id="carousel-prev" aria-label="Proyecto Anterior">
+            <i data-lucide="chevron-left"></i>
+          </button>
+
+          <div class="carousel-hint">
+            <i data-lucide="move-horizontal"></i>
+            <span>Desliza para explorar los proyectos</span>
+          </div>
+
+          <button class="carousel-nav-btn" id="carousel-next" aria-label="Proyecto Siguiente">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+
+        <!-- Horizontal Swipeable Smartphone Carousel -->
+        <div class="phone-carousel-track" id="phone-carousel">
+          <!-- Card 1: FinalRep Fitness App -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/FinalRep Celular.jpeg" alt="FinalRep Mobile App" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-rose">Aplicación Web & Mobile</span>
+              <h3 class="phone-card-title">FinalRep - Fitness Tracker</h3>
+              <p class="phone-card-desc">Plataforma interactiva de seguimiento de ejercicios, temporizadores inteligentes y contador de repeticiones.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: FinalRep Web Platform -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/FinalRep_1.png" alt="FinalRep Dashboard" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-coral">Web App & Analytics</span>
+              <h3 class="phone-card-title">FinalRep Web Interface</h3>
+              <p class="phone-card-desc">Panel web analítico para la gestión de rutinas, gráficas de progreso técnico y rendimiento físico.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Dashboard Diagnóstico -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/Dashbboard Diagnostico.png" alt="Dashboard Diagnostico" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-gold">Analítica & Big Data</span>
+              <h3 class="phone-card-title">Dashboard Diagnóstico</h3>
+              <p class="phone-card-desc">Panel de inteligencia de negocios para el seguimiento visual de métricas de impacto y métricas organizacionales.</p>
+            </div>
+          </div>
+
+          <!-- Card 4: Dashboard Aulas STEAM -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/Dashboard Aulas.png" alt="Dashboard Aulas" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-peach">Gestión STEAM</span>
+              <h3 class="phone-card-title">Dashboard Aulas STEAM</h3>
+              <p class="phone-card-desc">Plataforma de monitoreo en tiempo real para laboratorios, inventario tecnológico y capacitación docente.</p>
+            </div>
+          </div>
+
+          <!-- Card 5: Formulario Interactivo -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/Formulario interactivo.png" alt="Formulario Interactivo" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-rose">Recolección de Datos</span>
+              <h3 class="phone-card-title">Formulario Interactivo UI</h3>
+              <p class="phone-card-desc">Plataforma de recolección de datos inteligente con validación en tiempo real e interfaz responsiva.</p>
+            </div>
+          </div>
+
+          <!-- Card 6: Simulador Físico AR -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/Fisicas AR.jpeg" alt="Físicas AR" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-coral">Realidad Aumentada (AR)</span>
+              <h3 class="phone-card-title">Simulador Físico AR</h3>
+              <p class="phone-card-desc">Visualizador 3D en Realidad Aumentada para la enseñanza interactivas de principios físicos y mecánicos.</p>
+            </div>
+          </div>
+
+          <!-- Card 7: Mancuerna 3D AR -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/Mancuerna AR.jpeg" alt="Mancuerna AR" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-gold">Modelado 3D Interactivo</span>
+              <h3 class="phone-card-title">Visor AR Biomecánico</h3>
+              <p class="phone-card-desc">Simulación tridimensional de cargas físicas y posicionamiento en espacio real con tecnología WebXR.</p>
+            </div>
+          </div>
+
+          <!-- Card 8: Motor de Renderizado 3D -->
+          <div class="phone-carousel-card card">
+            <div class="phone-mockup">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="Aplicaciones WEB/Motor Render.png" alt="Motor Render 3D" class="phone-img">
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
+            <div class="phone-card-info">
+              <span class="project-tag tag-peach">Motor 3D & Render</span>
+              <h3 class="phone-card-title">Motor de Render 3D Web</h3>
+              <p class="phone-card-desc">Simulador gráfico interactivo para entornos virtuales, iluminación dinámica y sombreado digital.</p>
+            </div>
           </div>
         </div>
       </div>

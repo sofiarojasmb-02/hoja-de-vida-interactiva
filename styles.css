@@ -1936,3 +1936,223 @@ a.hero-contact-btn:hover {
     margin: 0 auto !important;
   }
 }
+
+
+/* ==========================================================================
+   PORTAFOLIO PROYECTOS PERSONALES - SMARTPHONE MOCKUP CAROUSEL
+   ========================================================================== */
+
+.nav-projects-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-color: var(--rose-magenta) !important;
+  color: var(--warm-gold) !important;
+  background: rgba(213, 88, 137, 0.15);
+  font-weight: 600;
+  transition: all var(--transition-normal);
+}
+
+.nav-projects-btn:hover {
+  background: var(--gradient-brand) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(213, 88, 137, 0.4);
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.carousel-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 16px;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--border-color);
+}
+
+.carousel-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.carousel-nav-btn:hover {
+  background: var(--rose-magenta);
+  color: #ffffff;
+  border-color: var(--warm-coral);
+  box-shadow: 0 4px 12px rgba(213, 88, 137, 0.4);
+}
+
+.phone-carousel-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 10px 5px 30px 5px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rose-magenta) transparent;
+  cursor: grab;
+}
+
+.phone-carousel-track:active {
+  cursor: grabbing;
+}
+
+.phone-carousel-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.phone-carousel-track::-webkit-scrollbar-thumb {
+  background: var(--rose-magenta);
+  border-radius: 10px;
+}
+
+.phone-carousel-card {
+  scroll-snap-align: center;
+  flex: 0 0 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 18px;
+  background: rgba(20, 12, 30, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-bottom: 4px solid var(--rose-magenta);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.phone-carousel-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--warm-coral);
+  border-bottom-color: var(--warm-gold);
+  box-shadow: 0 16px 35px rgba(213, 88, 137, 0.4);
+}
+
+/* Smartphone Mockup Frame */
+.phone-mockup {
+  position: relative;
+  width: 240px;
+  height: 480px;
+  background: #0f0918;
+  border-radius: 40px;
+  border: 5px solid #2e1d3d;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Smartphone Notch / Dynamic Island */
+.phone-notch {
+  position: absolute;
+  top: 10px;
+  width: 80px;
+  height: 18px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Phone Screen Image Container */
+.phone-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #05030a;
+}
+
+.phone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.phone-carousel-card:hover .phone-img {
+  transform: scale(1.06);
+}
+
+/* Smartphone Home Indicator Bar */
+.phone-home-bar {
+  position: absolute;
+  bottom: 8px;
+  width: 100px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.phone-card-info {
+  margin-top: 18px;
+  text-align: center;
+  width: 100%;
+}
+
+.project-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 8px;
+}
+
+.tag-rose { background: rgba(213, 88, 137, 0.2); color: var(--rose-magenta); }
+.tag-coral { background: rgba(255, 124, 110, 0.2); color: var(--warm-coral); }
+.tag-gold { background: rgba(255, 205, 98, 0.2); color: var(--warm-gold); }
+.tag-peach { background: rgba(255, 150, 104, 0.2); color: var(--peach-amber); }
+
+.phone-card-title {
+  font-family: var(--font-family-title);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.phone-card-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .phone-carousel-card {
+    flex: 0 0 280px;
+    padding: 18px 14px;
+  }
+  .phone-mockup {
+    width: 210px;
+    height: 420px;
+    border-radius: 34px;
+  }
+}
