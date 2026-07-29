@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sofía Rojas Montoya - Portafolio de Innovación & Proyectos Tecnológicos</title>
-  <meta name="description" content="Portafolio profesional interactivo de Sofía Rojas Montoya. Ingeniera Física, Especialista en Gestión de la Innovación, Creadora de Aplicaciones WEB, Modelado 3D y Soluciones Tecnológicas.">
+  <title>Sofía Rojas Montoya - Hoja de Vida Interactiva & Portafolio</title>
+  <meta name="description" content="Hoja de vida interactiva de Sofía Rojas Montoya. Ingeniera Física y Especialista en Gestión de la Innovación. Liderazgo de proyectos STEAM, IA, IoT y transformación digital.">
   
   <!-- Favicon & Brand Icons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -30,11 +30,11 @@
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Unified Stylesheet (Paleta de Colores 1 + Design System) -->
-  <link rel="stylesheet" href="style2.css?v=3">
+  <!-- Option 2 Stylesheet (Paleta de Colores 1 + Design System) -->
+  <link rel="stylesheet" href="style2.css?v=4">
 </head>
 <body>
-  <!-- 3D Three.js Background Canvas -->
+  <!-- Option 2 3D Three.js Background Canvas -->
   <canvas id="three-bg-canvas-v2"></canvas>
 
   <!-- Semi-transparent Filter Overlay separating 3D background from text and content -->
@@ -61,11 +61,6 @@
         <a href="#skills" class="nav-link">Habilidades</a>
         <a href="#education" class="nav-link">Formación</a>
         <a href="#references" class="nav-link">Referencias</a>
-        <!-- Prominent Button in Header for Personal Projects Portfolio -->
-        <a href="#proyectos-personales" class="nav-link nav-projects-btn">
-          <i data-lucide="layout-grid"></i>
-          Portafolio Proyectos Personales
-        </a>
         <a href="#contact" class="nav-link">Contacto</a>
       </nav>
 
@@ -96,7 +91,7 @@
         <div class="hero-content">
           <div class="badge-status animate-fade-in">
             <span class="pulse-dot"></span>
-            <span>Disponible para Proyectos de Innovación & Desarrollo</span>
+            <span>Disponible para Proyectos de Innovación</span>
           </div>
           
           <h1 class="hero-title animate-title">
@@ -108,15 +103,15 @@
           </h2>
           
           <p class="hero-description animate-fade-in-delayed">
-            Liderazgo de proyectos tecnológicos con impacto social, diseño de experiencias de aprendizaje STEAM, apropiación de Inteligencia Artificial, prototipado 4.0, modelado 3D y desarrollo de soluciones de software y aplicaciones web.
+            Liderazgo de proyectos tecnológicos con impacto social, diseño de experiencias de aprendizaje STEAM y desarrollo de soluciones de software y hardware con tecnologías de la Cuarta Revolución Industrial.
           </p>
 
           <div class="hero-actions animate-fade-in-delayed">
-            <a href="#proyectos-personales" class="btn btn-primary">
-              <i data-lucide="layout-grid"></i>
-              Explorar Proyectos Personales
+            <a href="#experience" class="btn btn-primary">
+              Ver Experiencia
+              <i data-lucide="arrow-right"></i>
             </a>
-            <a href="#experience" class="btn btn-outline">Ver Experiencia Laboral</a>
+            <a href="#contact" class="btn btn-outline">Contáctame</a>
           </div>
         </div>
 
@@ -128,12 +123,12 @@
           </div>
           <div class="hero-img-badge">
             <i data-lucide="sparkles"></i>
-            <span>STEAM & Full-Stack Tech</span>
+            <span>STEAM Leader</span>
           </div>
         </div>
       </div>
 
-      <!-- Quick Contact Cards in Hero -->
+      <!-- Quick Contact Links in Hero -->
       <div class="container" style="margin-top: 40px;">
         <div class="about-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
           <div class="card" style="padding: 16px; display: flex; align-items: center; gap: 12px;">
@@ -184,45 +179,130 @@
             </div>
             <h3>¿Quién soy?</h3>
             <p>
-              Ingeniera Física y Especialista en Gestión de la Innovación, con experiencia en la dirección de proyectos de transformación digital, innovación y apropiación tecnológica. He liderado equipos multidisciplinarios y estrategias de implementación de <strong>Ecosistemas STEAM</strong>, Inteligencia Artificial, IoT, realidades extendidas y fabricación digital.
+              Ingeniera Física y Especialista en Gestión de la Innovación, con experiencia en la dirección de proyectos de transformación digital, innovación y apropiación tecnológica. He liderado equipos multidisciplinarios y estrategias de implementación de <strong>Ecosistemas STEAM</strong>, inteligencia artificial, IoT, realidades extendidas y fabricación digital.
+            </p>
+            <p style="margin-top: 12px; color: var(--text-secondary);">
+              Mi experiencia integra liderazgo técnico, gestión del conocimiento, diseño de procesos de formación, desarrollo de aplicaciones web y móviles, y acompañamiento técnico para instituciones, empresas y organizaciones.
             </p>
           </div>
 
-          <div class="card about-card">
-            <div class="about-icon">
-              <i data-lucide="cpu"></i>
+          <div class="about-pillars" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="card pillar-card">
+              <div class="about-icon" style="width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 12px;">
+                <i data-lucide="rocket"></i>
+              </div>
+              <h4 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 6px;">Transformación Digital</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Lidero procesos de apropiación e integración de tecnologías de punta para la optimización de procesos.</p>
             </div>
-            <h3>Liderazgo & FabLab UNAL</h3>
-            <p>
-              Cofundadora y líder de proyectos en el FabLab de la Universidad Nacional de Colombia. Experiencia en dirección de laboratorios de fabricación digital, prototipado rápido, modelado 3D y formación STEAM.
-            </p>
-          </div>
 
-          <div class="card about-card">
-            <div class="about-icon">
-              <i data-lucide="code"></i>
+            <div class="card pillar-card">
+              <div class="about-icon" style="width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 12px;">
+                <i data-lucide="graduation-cap"></i>
+              </div>
+              <h4 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 6px;">Ecosistemas STEAM</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Diseño y ejecución de programas educativos interactivos centrados en ciencia, tecnología y arte.</p>
             </div>
-            <h3>Desarrollo Web & Soluciones</h3>
-            <p>
-              Diseño y programación de aplicaciones web interactivas, plataformas de recolección de datos, dashboards analíticos y simuladores 3D/AR para la divulgación científica y física aplicada.
-            </p>
+
+            <div class="card pillar-card">
+              <div class="about-icon" style="width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 12px;">
+                <i data-lucide="cpu"></i>
+              </div>
+              <h4 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 6px;">Tecnologías Emergentes</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Experiencia práctica en Inteligencia Artificial, Internet de las Cosas (IoT), Impresión 3D y VR/AR.</p>
+            </div>
+
+            <div class="card pillar-card">
+              <div class="about-icon" style="width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 12px;">
+                <i data-lucide="users"></i>
+              </div>
+              <h4 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 6px;">Liderazgo Técnico</h4>
+              <p style="font-size: 0.85rem; color: var(--text-secondary);">Dirección y mentoría de equipos multidisciplinarios de ingenieros, diseñadores y docentes.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Experience Section (Full 7 Timeline Roles) -->
+    <!-- Experience Section (Original Option 1 Layout with Category Filters) -->
     <section id="experience" class="section-padding">
       <div class="container">
         <div class="section-header text-center">
           <span class="section-pretitle">Trayectoria</span>
-          <h2 class="section-title">Experiencia Profesional Completa</h2>
+          <h2 class="section-title">Experiencia Profesional</h2>
           <div class="section-divider"></div>
         </div>
 
+        <!-- Timeline Filters -->
+        <div class="portfolio-filters" style="margin-bottom: 40px;">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="liderazgo">Liderazgo y Gestión</button>
+          <button class="filter-btn" data-filter="consultoria">Consultoría y 3D</button>
+          <button class="filter-btn" data-filter="docencia">Docencia y Academia</button>
+        </div>
+
+        <!-- Vertical Timeline -->
         <div class="timeline">
-          <!-- Role 1 -->
-          <div class="timeline-item">
+          <!-- Item 1 -->
+          <div class="timeline-item" data-category="consultoria">
+            <div class="timeline-dot"></div>
+            <div class="card timeline-card">
+              <span class="timeline-date">08/2022 - 02/2025</span>
+              <h3 class="timeline-title">Consultora en Innovación Tecnológica | FabLab UNAL</h3>
+              <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Manizales</h4>
+              <ul>
+                <li>Apoyo en la constitución técnica del FabLab, estandarizando procesos de capacitación en transformación digital para estudiantes, docentes y sector empresarial.</li>
+                <li>Asesoría a empresas regionales para la solución de problemáticas corporativas mediante la incorporación de tecnologías digitales y mejora operativa.</li>
+                <li>Diseño y optimización de activos digitales para entornos virtuales (VR/AR, videojuegos e impresión 3D) utilizando modelado 3D de alta precisión.</li>
+                <li>Gestión de alianzas estratégicas y formulación de soluciones innovadoras y tecnológicas alineadas con las demandas industriales de la región.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="timeline-item" data-category="liderazgo">
+            <div class="timeline-dot"></div>
+            <div class="card timeline-card">
+              <span class="timeline-date">05/2024 - 10/2024</span>
+              <h3 class="timeline-title">Project Manager de Innovación Educativa y Tecnológica</h3>
+              <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Bogotá</h4>
+              <ul>
+                <li>Responsable del montaje e implementación técnica del Clúster STEAM en tres sedes de la Universidad Nacional, fortaleciendo la infraestructura tecnológica y educativa.</li>
+                <li>Liderazgo en procesos de gestión del conocimiento, capacitación en metodologías STEAM y desarrollo de proyectos tecnológicos para más de 1,500 personas.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item" data-category="docencia">
+            <div class="timeline-dot"></div>
+            <div class="card timeline-card">
+              <span class="timeline-date">05/2023 - 12/2023</span>
+              <h3 class="timeline-title">Docente Especialista | Programa "Todos a la U"</h3>
+              <h4 class="timeline-subtitle">ATENEA Y UNIVERSIDAD NACIONAL DE COLOMBIA - Bogotá</h4>
+              <ul>
+                <li>Liderazgo de procesos formativos sincrónicos para grupos de hasta 50 estudiantes, ejecutando estrategias de seguimiento personalizado y retroalimentación técnica.</li>
+                <li>Diseño instruccional: Estructuración de rutas de aprendizaje en Animación Digital y desarrollo de retos técnicos para entornos virtuales masivos.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="timeline-item" data-category="liderazgo">
+            <div class="timeline-dot"></div>
+            <div class="card timeline-card">
+              <span class="timeline-date">03/2025 - 10/2025</span>
+              <h3 class="timeline-title">Líder de Formación y Operaciones | Proyecto MinCiencias</h3>
+              <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Tumaco</h4>
+              <ul>
+                <li>Asesoría a docentes en el diseño y desarrollo de proyectos STEAM, desde la identificación de problemáticas hasta la creación de prototipos funcionales.</li>
+                <li>Implementación de metodologías activas (ABP, Neurodidáctica y Design Thinking) en 29 laboratorios de 15 municipios, fortaleciendo la transformación digital comunitaria.</li>
+                <li>Integración de tecnologías emergentes (Robótica, IA, IoT y Modelado 3D) en procesos de formación escolar y docente.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="timeline-item" data-category="liderazgo">
             <div class="timeline-dot"></div>
             <div class="card timeline-card">
               <span class="timeline-date">01/2026 - Presente</span>
@@ -230,89 +310,34 @@
               <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Manizales</h4>
               <ul>
                 <li>Coordinación integral y puesta en marcha del proyecto Aulas STEAM en instituciones educativas públicas de Manizales.</li>
-                <li>Liderazgo de un equipo multidisciplinario para la adopción de Inteligencia Artificial e Impresión 3D.</li>
-                <li>Capacitación continua a más de 20 docentes mensuales en Machine Learning, Modelado 3D y energías renovables.</li>
+                <li>Liderazgo y seguimiento de un equipo multidisciplinario de profesionales en territorio para asegurar la excelencia operativa.</li>
+                <li>Capacitación continua a más de 20 docentes mensuales en tecnologías críticas: Impresión 3D, Machine Learning, IA aplicada, Modelado 3D y energías renovables.</li>
               </ul>
             </div>
           </div>
 
-          <!-- Role 2 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="card timeline-card">
-              <span class="timeline-date">03/2025 - 10/2025</span>
-              <h3 class="timeline-title">Líder de Formación y Operaciones | Proyecto MinCiencias</h3>
-              <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Tumaco</h4>
-              <ul>
-                <li>Implementación de metodologías activas (ABP, Design Thinking y Neurodidáctica) en 29 laboratorios de 15 municipios.</li>
-                <li>Integración de tecnologías emergentes (Robótica, IA, IoT y Modelado 3D) para la transformación digital comunitaria.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Role 3 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="card timeline-card">
-              <span class="timeline-date">05/2024 - 10/2024</span>
-              <h3 class="timeline-title">Project Manager de Innovación Educativa y Tecnológica</h3>
-              <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Bogotá</h4>
-              <ul>
-                <li>Montaje e implementación técnica del Clúster STEAM en tres sedes de la Universidad Nacional.</li>
-                <li>Gestión del conocimiento y capacitación en metodologías STEAM para más de 1,500 personas.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Role 4 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="card timeline-card">
-              <span class="timeline-date">08/2022 - 02/2025</span>
-              <h3 class="timeline-title">Consultora en Innovación Tecnológica | FabLab UNAL</h3>
-              <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Manizales</h4>
-              <ul>
-                <li>Apoyo en la constitución técnica del FabLab y asesoría empresarial para la transformación digital regional.</li>
-                <li>Diseño de activos digitales 3D para realidad virtual, simuladores e impresión 3D de alta precisión.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Role 5 -->
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="card timeline-card">
-              <span class="timeline-date">05/2023 - 12/2023</span>
-              <h3 class="timeline-title">Docente Especialista | Programa "Todos a la U"</h3>
-              <h4 class="timeline-subtitle">ATENEA Y UNIVERSIDAD NACIONAL DE COLOMBIA - Bogotá</h4>
-              <ul>
-                <li>Docencia sincrónica y diseño instruccional en rutas de aprendizaje de Animación Digital y tecnologías web para grupos de hasta 50 estudiantes.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Role 6 -->
-          <div class="timeline-item">
+          <!-- Item 6 -->
+          <div class="timeline-item" data-category="docencia">
             <div class="timeline-dot"></div>
             <div class="card timeline-card">
               <span class="timeline-date">01/2021 - 12/2022</span>
               <h3 class="timeline-title">Asistente de Desarrollo e Innovación | Aula STEM</h3>
               <h4 class="timeline-subtitle">UNIVERSIDAD NACIONAL DE COLOMBIA - Manizales</h4>
               <ul>
-                <li>Diseño y desarrollo de proyectos de innovación educativa con tecnologías 4.0.</li>
+                <li>Participación activa en el diseño y desarrollo de proyectos de innovación tecnológica para la estructuración de soluciones educativas basadas en tecnologías emergentes.</li>
               </ul>
             </div>
           </div>
 
-          <!-- Role 7 -->
-          <div class="timeline-item">
+          <!-- Item 7 -->
+          <div class="timeline-item" data-category="docencia">
             <div class="timeline-dot"></div>
             <div class="card timeline-card">
               <span class="timeline-date">01/2020 - 12/2020</span>
               <h3 class="timeline-title">Asistente de Investigación | Solicitud de Patente UV</h3>
               <h4 class="timeline-subtitle">GRUPO DE INVESTIGACIÓN EN INSTRUMENTACIÓN FÍSICA</h4>
               <ul>
-                <li>Diseño 3D e ingeniería de detalle de prototipo de robot de desinfección UV para COVID-19 con patente radicada.</li>
+                <li>Diseño 3D e ingeniería de detalle de un prototipo de robot de desinfección UV para COVID-19, proyecto que culminó con éxito en la radicación de una solicitud de patente.</li>
               </ul>
             </div>
           </div>
@@ -320,37 +345,172 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills Section (Option 1 Detailed Progress Bars & Categories) -->
     <section id="skills" class="section-padding">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-pretitle">Competencias</span>
-          <h2 class="section-title">Habilidades & Tecnologías Críticas</h2>
+          <span class="section-pretitle">Experticia</span>
+          <h2 class="section-title">Habilidades y Competencias</h2>
           <div class="section-divider"></div>
         </div>
 
-        <div class="skills-wrapper">
-          <div class="skill-category card">
-            <h3><i data-lucide="code-2"></i> Desarrollo Web & 3D</h3>
-            <div class="skill-tags">
-              <span class="skill-chip">HTML5 / CSS3 (98%)</span>
-              <span class="skill-chip">JavaScript ES6+ (96%)</span>
-              <span class="skill-chip">Three.js 3D (94%)</span>
-              <span class="skill-chip">Anime.js (95%)</span>
-              <span class="skill-chip">UI/UX Responsive (98%)</span>
+        <div class="skills-wrapper" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+          <!-- Hard Skills (Tecnologías) -->
+          <div class="card skill-category">
+            <h3 style="font-family: var(--font-family-title); font-size: 1.2rem; color: var(--rose-magenta); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+              <i data-lucide="cpu"></i> Tecnologías Críticas
+            </h3>
+            <div class="skills-list" style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Inteligencia Artificial Aplicada</span>
+                  <span style="color: var(--warm-coral);">96%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 96%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Modelado y Fabricación Digital (3D / CNC)</span>
+                  <span style="color: var(--warm-coral);">98%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 98%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Internet de las Cosas (IoT) y Robótica</span>
+                  <span style="color: var(--warm-coral);">95%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 95%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Realidad Extendida (VR/AR)</span>
+                  <span style="color: var(--warm-coral);">94%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 94%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="skill-category card">
-            <h3><i data-lucide="layers"></i> Innovación & STEAM</h3>
-            <div class="skill-tags">
-              <span class="skill-chip">FabLab Management (98%)</span>
-              <span class="skill-chip">Prototipado 4.0 (98%)</span>
-              <span class="skill-chip">Realidad Aumentada AR (94%)</span>
-              <span class="skill-chip">IoT & Robótica (95%)</span>
-              <span class="skill-chip">Física Aplicada (98%)</span>
+          <!-- Innovation & Management Skills -->
+          <div class="card skill-category">
+            <h3 style="font-family: var(--font-family-title); font-size: 1.2rem; color: var(--rose-magenta); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+              <i data-lucide="lightbulb"></i> Gestión e Innovación
+            </h3>
+            <div class="skills-list" style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Gestión de Proyectos de Innovación</span>
+                  <span style="color: var(--warm-coral);">98%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 98%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Metodologías Ágiles (Scrum, Design Thinking)</span>
+                  <span style="color: var(--warm-coral);">97%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 97%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Gestión del Conocimiento</span>
+                  <span style="color: var(--warm-coral);">95%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 95%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Diseño Instruccional y Pedagogía STEAM</span>
+                  <span style="color: var(--warm-coral);">96%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 96%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Professional / Interpersonal Skills -->
+          <div class="card skill-category">
+            <h3 style="font-family: var(--font-family-title); font-size: 1.2rem; color: var(--rose-magenta); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+              <i data-lucide="users"></i> Habilidades Blandas
+            </h3>
+            <div class="skills-list" style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Liderazgo de Equipos Interdisciplinarios</span>
+                  <span style="color: var(--warm-coral);">98%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 98%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Resolución de Problemas Creativos</span>
+                  <span style="color: var(--warm-coral);">99%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 99%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Comunicación Efectiva y Asertiva</span>
+                  <span style="color: var(--warm-coral);">96%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 96%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">
+                  <span>Inglés Intermedio (Nivel B1)</span>
+                  <span style="color: var(--warm-coral);">88%</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: var(--border-radius-full); overflow: hidden;">
+                  <div class="skill-progress" style="width: 88%; height: 100%; background: var(--gradient-brand); border-radius: var(--border-radius-full); transition: width 1s ease;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Tags -->
+        <div class="skill-tags" style="margin-top: 30px; justify-content: center;">
+          <span class="skill-chip">AI Applied</span>
+          <span class="skill-chip">Design Thinking</span>
+          <span class="skill-chip">3D Printing</span>
+          <span class="skill-chip">ABP</span>
+          <span class="skill-chip">IoT</span>
+          <span class="skill-chip">Virtual Reality</span>
+          <span class="skill-chip">Scrum</span>
+          <span class="skill-chip">CNC Machining</span>
+          <span class="skill-chip">Neurodidáctica</span>
         </div>
       </div>
     </section>
@@ -359,8 +519,8 @@
     <section id="education" class="section-padding">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-pretitle">Formación Académica</span>
-          <h2 class="section-title">Educación & Títulos</h2>
+          <span class="section-pretitle">Estudios</span>
+          <h2 class="section-title">Formación Académica</h2>
           <div class="section-divider"></div>
         </div>
 
@@ -370,21 +530,21 @@
             <span class="timeline-date">2024</span>
             <h3>Especialista en Gestión de la Innovación</h3>
             <p class="edu-school">Universidad de Manizales</p>
-            <p class="edu-desc">Estructuración de proyectos innovadores, diseño de estrategias operativas y articulación de tecnología para la mejora de competitividad.</p>
+            <p class="edu-desc">Enfoque en estructuración de proyectos innovadores, diseño de estrategias operativas y articulación de tecnología para la mejora de competitividad en organizaciones.</p>
           </div>
 
           <div class="card education-card">
             <div class="edu-icon"><i data-lucide="graduation-cap"></i></div>
             <span class="timeline-date">2018 - 2022</span>
-            <h3>Ingeniería Física</h3>
+            <h3>Pregrado en Ingeniería Física</h3>
             <p class="edu-school">Universidad Nacional de Colombia</p>
-            <p class="edu-desc">Estudio de física aplicada, instrumentación, tecnologías de fabricación 3D y desarrollo de hardware/software técnico.</p>
+            <p class="edu-desc">Estudio de física aplicada, instrumentación, tecnologías de fabricación 3D y desarrollo de hardware/software técnico. Participación activa en grupos de investigación con impacto patentable.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- References Section -->
+    <!-- References Section (With Copy Email & Phone Buttons) -->
     <section id="references" class="section-padding">
       <div class="container">
         <div class="section-header text-center">
@@ -396,204 +556,29 @@
         <div class="about-grid">
           <div class="card">
             <h3>Juan David Villegas Tamayo</h3>
-            <p style="color: var(--warm-coral); font-weight: 600;">Ingeniero Electrónico</p>
-            <p style="margin-top: 8px; color: var(--text-secondary);">Email: jdvillegast@unal.edu.co</p>
-            <p style="color: var(--text-secondary);">Teléfono: +57 311 743 9729</p>
+            <p style="color: var(--warm-coral); font-weight: 600; margin-bottom: 12px;">Ingeniero Electrónico</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="btn btn-outline btn-sm btn-copy" data-copy="jdvillegast@unal.edu.co">
+                <i data-lucide="mail"></i>
+                <span>jdvillegast@unal.edu.co</span>
+              </button>
+              <button class="btn btn-outline btn-sm btn-copy" data-copy="3117439729">
+                <i data-lucide="phone"></i>
+                <span>3117439729</span>
+              </button>
+            </div>
           </div>
+
           <div class="card">
             <h3>Daniel Vick</h3>
-            <p style="color: var(--warm-coral); font-weight: 600;">Coordinador Aula STEM UNAL</p>
-            <p style="margin-top: 8px; color: var(--text-secondary);">Email: daniel.vick87@gmail.com</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Personal Projects Section at the End of Page (Aplicaciones WEB, Modelado 3D, Soluciones Tecnológicas) -->
-    <section id="proyectos-personales" class="section-padding" style="background: rgba(13, 8, 20, 0.4);">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-pretitle">Portafolio de Proyectos Personales</span>
-          <h2 class="section-title">Aplicaciones WEB, Modelado 3D & Soluciones Tecnológicas</h2>
-          <div class="section-divider"></div>
-          <p class="section-description">
-            Galería interactiva organizada por categorías de desarrollo técnico, modelado 3D y analítica tecnológica.
-          </p>
-        </div>
-
-        <!-- Filter Controls matching reference template layout -->
-        <div class="portfolio-filters">
-          <button class="filter-btn active" data-filter="all">Todos los Proyectos</button>
-          <button class="filter-btn" data-filter="web">Aplicaciones WEB</button>
-          <button class="filter-btn" data-filter="3d">Modelado 3D & Render</button>
-          <button class="filter-btn" data-filter="tech">Soluciones Tecnológicas</button>
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="projects-grid">
-          
-          <!-- Category 1: Aplicaciones WEB - FinalRep -->
-          <div class="card project-card" data-category="web">
-            <div class="project-img-wrapper">
-              <img src="Aplicaciones WEB/FinalRep_1.png" alt="FinalRep Web App" class="project-img">
-              <div class="project-overlay">
-                <button class="btn btn-sm btn-light btn-preview" data-title="FinalRep - Fitness Tracker & IA Web/Mobile App" data-img="Aplicaciones WEB/FinalRep_1.png" data-desc="Plataforma web y móvil desarrollada para el seguimiento inteligente de ejercicios físicos, dashboards analíticos y estimación de repeticiones con algoritmos de IA.">
-                  <i data-lucide="eye"></i> Ampliar Captura
-                </button>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Aplicación WEB</span>
-                <span class="tag">IA Fitness</span>
-                <span class="tag">Full-Stack</span>
-              </div>
-              <h3 class="project-title">FinalRep - Fitness Tracker & IA</h3>
-              <p class="project-summary">
-                Plataforma web interactiva para analítica de entrenamiento deportivo con interfaz intuitiva y vista responsive para móvil.
-              </p>
-              <div class="project-thumbs">
-                <img src="Aplicaciones WEB/FinalRep_1.png" alt="Thumb 1" class="thumb-mini active" onclick="changeProjectImg(this, 'Aplicaciones WEB/FinalRep_1.png')">
-                <img src="Aplicaciones WEB/FinalRep_2.png" alt="Thumb 2" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/FinalRep_2.png')">
-                <img src="Aplicaciones WEB/FinalRep Celular.jpeg" alt="Thumb 3" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/FinalRep Celular.jpeg')">
-              </div>
+            <p style="color: var(--warm-coral); font-weight: 600; margin-bottom: 12px;">Coordinador Aula STEM UNAL</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="btn btn-outline btn-sm btn-copy" data-copy="daniel.vick87@gmail.com">
+                <i data-lucide="mail"></i>
+                <span>daniel.vick87@gmail.com</span>
+              </button>
             </div>
           </div>
-
-          <!-- Category 1: Aplicaciones WEB - Formulario Interactivo -->
-          <div class="card project-card" data-category="web">
-            <div class="project-img-wrapper">
-              <img src="Aplicaciones WEB/Formulario interactivo.png" alt="Formulario Interactivo" class="project-img">
-              <div class="project-overlay">
-                <button class="btn btn-sm btn-light btn-preview" data-title="Sistema de Formularios Web Interactivos" data-img="Aplicaciones WEB/Formulario interactivo.png" data-desc="Aplicación web para captura dinámica de datos con validaciones avanzadas, feedback visual en tiempo real y diseño responsive.">
-                  <i data-lucide="eye"></i> Ampliar Captura
-                </button>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Aplicación WEB</span>
-                <span class="tag">UI/UX</span>
-                <span class="tag">Frontend</span>
-              </div>
-              <h3 class="project-title">Formularios Web Interactivos</h3>
-              <p class="project-summary">
-                Plataforma dinámica para captura de información con animaciones fluidas y experiencia de usuario optimizada.
-              </p>
-            </div>
-          </div>
-
-          <!-- Category 2: Modelado 3D & Motor Render -->
-          <div class="card project-card" data-category="3d">
-            <div class="project-img-wrapper">
-              <img src="Aplicaciones WEB/Motor Render.png" alt="Motor Render 3D" class="project-img">
-              <div class="project-overlay">
-                <button class="btn btn-sm btn-light btn-preview" data-title="Motor Render & Modelado 3D de Alta Precisión" data-img="Aplicaciones WEB/Motor Render.png" data-desc="Modelado 3D detallado e ingeniería de motores y mecanismos técnicos para simulación de alta precisión y renderizado fotorrealista.">
-                  <i data-lucide="eye"></i> Ampliar Captura
-                </button>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Modelado 3D</span>
-                <span class="tag">Renderizado</span>
-                <span class="tag">CAD / 3D</span>
-              </div>
-              <h3 class="project-title">Motor Render & Modelado 3D</h3>
-              <p class="project-summary">
-                Simulación y renderizado fotorrealista de componentes mecánicos y estructuras 3D complejas.
-              </p>
-              <div class="project-thumbs">
-                <img src="Aplicaciones WEB/Motor Render.png" alt="Motor 1" class="thumb-mini active" onclick="changeProjectImg(this, 'Aplicaciones WEB/Motor Render.png')">
-                <img src="Aplicaciones WEB/Motor Render_2.png" alt="Motor 2" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/Motor Render_2.png')">
-                <img src="Aplicaciones WEB/Motor Render_3.png" alt="Motor 3" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/Motor Render_3.png')">
-                <img src="Aplicaciones WEB/Motor 3D.png" alt="Motor 4" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/Motor 3D.png')">
-              </div>
-            </div>
-          </div>
-
-          <!-- Category 2: Modelado 3D & Realidad Aumentada -->
-          <div class="card project-card" data-category="3d">
-            <div class="project-img-wrapper">
-              <img src="Aplicaciones WEB/Fisicas AR.jpeg" alt="Físicas en Realidad Aumentada" class="project-img">
-              <div class="project-overlay">
-                <button class="btn btn-sm btn-light btn-preview" data-title="Experiencias en Realidad Aumentada (AR)" data-img="Aplicaciones WEB/Fisicas AR.jpeg" data-desc="Aplicación en Realidad Aumentada para la simulación interactiva de físicas, vectores de fuerza y biotecnología.">
-                  <i data-lucide="eye"></i> Ampliar Captura
-                </button>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Realidad Aumentada</span>
-                <span class="tag">Física 3D</span>
-                <span class="tag">AR / VR</span>
-              </div>
-              <h3 class="project-title">Simulador de Físicas en AR 3D</h3>
-              <p class="project-summary">
-                Visualización 3D e interactividad en Realidad Aumentada para experimentar conceptos científicos avanzados.
-              </p>
-              <div class="project-thumbs">
-                <img src="Aplicaciones WEB/Fisicas AR.jpeg" alt="AR 1" class="thumb-mini active" onclick="changeProjectImg(this, 'Aplicaciones WEB/Fisicas AR.jpeg')">
-                <img src="Aplicaciones WEB/Mancuerna AR.jpeg" alt="AR 2" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/Mancuerna AR.jpeg')">
-                <img src="Aplicaciones WEB/Mancuerna AR_2.jpeg" alt="AR 3" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/Mancuerna AR_2.jpeg')">
-              </div>
-            </div>
-          </div>
-
-          <!-- Category 3: Soluciones Tecnológicas - Dashboard Analítico -->
-          <div class="card project-card" data-category="tech">
-            <div class="project-img-wrapper">
-              <img src="Aplicaciones WEB/Dashboard Aulas.png" alt="Dashboard Aulas" class="project-img">
-              <div class="project-overlay">
-                <button class="btn btn-sm btn-light btn-preview" data-title="Dashboard de Gestión & Diagnóstico Tecnológico" data-img="Aplicaciones WEB/Dashboard Aulas.png" data-desc="Plataforma de inteligencia de datos para monitoreo de laboratorios STEAM, gestión de métricas y analítica de innovación.">
-                  <i data-lucide="eye"></i> Ampliar Captura
-                </button>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Solución Tecnológica</span>
-                <span class="tag">Dashboards</span>
-                <span class="tag">Analítica</span>
-              </div>
-              <h3 class="project-title">Dashboard Analítico de Innovación</h3>
-              <p class="project-summary">
-                Sistema de visualización de datos y panel de control operativo para proyectos de infraestructura STEAM.
-              </p>
-              <div class="project-thumbs">
-                <img src="Aplicaciones WEB/Dashboard Aulas.png" alt="Dash 1" class="thumb-mini active" onclick="changeProjectImg(this, 'Aplicaciones WEB/Dashboard Aulas.png')">
-                <img src="Aplicaciones WEB/Dashbboard Diagnostico.png" alt="Dash 2" class="thumb-mini" onclick="changeProjectImg(this, 'Aplicaciones WEB/Dashbboard Diagnostico.png')">
-              </div>
-            </div>
-          </div>
-
-          <!-- Category 3: Soluciones Tecnológicas - FabLab UNAL & IoT -->
-          <div class="card project-card" data-category="tech">
-            <div class="project-img-wrapper">
-              <img src="Evidencia3.jpg" alt="FabLab UNAL IoT" class="project-img">
-              <div class="project-overlay">
-                <button class="btn btn-sm btn-light btn-preview" data-title="Prototipado IoT & Fabricación Digital FabLab UNAL" data-img="Evidencia3.jpg" data-desc="Prototipado electrónico 4.0, integración de sensores IoT, desarrollo de componentes mecánicos e impresión 3D de alta velocidad.">
-                  <i data-lucide="eye"></i> Ampliar Captura
-                </button>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Prototipado 4.0</span>
-                <span class="tag">IoT & Hardware</span>
-                <span class="tag">FabLab UNAL</span>
-              </div>
-              <h3 class="project-title">FabLab UNAL & Prototipado 4.0</h3>
-              <p class="project-summary">
-                Desarrollo de prototipos físicos e integración de hardware/software para soluciones tecnológicas regionales.
-              </p>
-              <div class="project-thumbs">
-                <img src="Evidencia3.jpg" alt="FabLab 1" class="thumb-mini active" onclick="changeProjectImg(this, 'Evidencia3.jpg')">
-                <img src="Evidencia4.jpg" alt="FabLab 2" class="thumb-mini" onclick="changeProjectImg(this, 'Evidencia4.jpg')">
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -614,8 +599,8 @@
               <i data-lucide="message-circle"></i>
             </div>
             <h3>WhatsApp Directo</h3>
-            <p>Respuesta rápida para consultas sobre proyectos web, desarrollo de software, modelado 3D o consultoría en innovación.</p>
-            <a href="https://wa.me/573206787561?text=Hola%20Sof%C3%ADa,%20vi%20tu%20portafolio%20web%20y%20me%20gustar%C3%ADa%20contactarte." target="_blank" class="btn btn-whatsapp">
+            <p>Respuesta rápida para consultas sobre proyectos tecnológicos, consultoría en innovación o asesoría STEAM.</p>
+            <a href="https://wa.me/573206787561?text=Hola%20Sof%C3%ADa,%20vi%20tu%20hoja%20de%20vida%20interactiva%20y%20me%20gustar%C3%ADa%20contactarte." target="_blank" class="btn btn-whatsapp">
               <i data-lucide="message-square"></i>
               <span>Escribir por WhatsApp</span>
             </a>
@@ -664,18 +649,18 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-container">
-      <p>&copy; 2026 Sofía Rojas Montoya. Portafolio de Innovación, Desarrollo WEB & Modelado 3D.</p>
-      <p class="footer-tagline">Ingeniería Física + Desarrollo WEB + Innovación</p>
+      <p>&copy; 2026 Sofía Rojas Montoya. Hoja de Vida Interactiva & Portafolio de Innovación.</p>
+      <p class="footer-tagline">Ingeniería Física + Innovación + Tecnologías 4.0</p>
       <a href="#" class="back-to-top" aria-label="Volver arriba">
         <i data-lucide="chevron-up"></i>
       </a>
     </div>
   </footer>
 
-  <!-- Dedicated Three.js Setup Module -->
+  <!-- Dedicated Three.js Setup Module (Option 2 3D Engine) -->
   <script src="three-setup.js?v=1"></script>
 
-  <!-- Unified Interactive Logic Script -->
-  <script src="script2.js?v=3"></script>
+  <!-- Unified Interactive Script -->
+  <script src="script2.js?v=4"></script>
 </body>
 </html>

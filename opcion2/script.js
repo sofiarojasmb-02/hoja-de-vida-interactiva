@@ -82,9 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Portfolio Filtering System
+  // 5. Portfolio & Timeline Filtering System
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
+  const timelineItems = document.querySelectorAll('.timeline-item');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const filterValue = btn.getAttribute('data-filter');
 
+      // Filter Project Cards
       projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filterValue === 'all' || filterValue === category) {
@@ -104,6 +106,36 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => { card.style.display = 'none'; }, 300);
         }
       });
+
+      // Filter Timeline Items
+      timelineItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (filterValue === 'all' || filterValue === category) {
+          item.style.display = 'block';
+          setTimeout(() => { item.style.opacity = '1'; }, 50);
+        } else {
+          item.style.opacity = '0';
+          setTimeout(() => { item.style.display = 'none'; }, 300);
+        }
+      });
+    });
+  });
+
+  // 5b. Copy to Clipboard Buttons (Email & Phone in References)
+  document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const textToCopy = btn.getAttribute('data-copy');
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<i data-lucide="check"></i> <span>¡Copiado!</span>';
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+          }, 2000);
+        });
+      }
     });
   });
 

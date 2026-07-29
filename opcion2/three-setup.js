@@ -1,11 +1,12 @@
 /* ==========================================================================
    THREE-SETUP.JS - Dedicated Three.js 3D Graphics Engine Module
-   Option 1 Palette & Design System + Version 2 Animation Engine
+   Designed for Option 2 Portfolio using Paleta de colores_1
    ========================================================================== */
 
 function initThreeJSSetup() {
   const canvas = document.getElementById('three-bg-canvas-v2');
   if (!canvas || typeof THREE === 'undefined' || typeof anime === 'undefined') {
+    console.warn('Three.js or Anime.js not detected on three-bg-canvas-v2');
     return;
   }
 
@@ -22,29 +23,30 @@ function initThreeJSSetup() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // 2. Lighting Setup (Option 1 Palette: Indigo #6366f1, Teal #14b8a6, Sky Blue #3b82f6)
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+  // 2. Lighting Setup with Paleta de colores_1 Tones
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
   scene.add(ambientLight);
 
-  const pointLight1 = new THREE.PointLight(0x6366f1, 2.5, 90);
+  // Paleta 1 Lights: #d55889 (Rose Magenta), #eb6a7c (Coral Rose), #ffcd62 (Warm Gold)
+  const pointLight1 = new THREE.PointLight(0xd55889, 2.5, 90);
   pointLight1.position.set(20, 20, 20);
   scene.add(pointLight1);
 
-  const pointLight2 = new THREE.PointLight(0x14b8a6, 2.2, 90);
+  const pointLight2 = new THREE.PointLight(0xeb6a7c, 2.2, 90);
   pointLight2.position.set(-20, -20, 15);
   scene.add(pointLight2);
 
-  const pointLight3 = new THREE.PointLight(0x38b6ff, 1.8, 70);
+  const pointLight3 = new THREE.PointLight(0xffcd62, 1.8, 70);
   pointLight3.position.set(0, 15, -10);
   scene.add(pointLight3);
 
   // 3. Central STEAM & FabLab 3D Nucleus Structure
   const nucleusGroup = new THREE.Group();
 
-  // Outer Torus Rings (#6366f1 & #14b8a6)
+  // Glowing Outer Torus Ring (#d55889)
   const torusGeom = new THREE.TorusGeometry(6.5, 0.09, 16, 100);
   const torusMat1 = new THREE.MeshStandardMaterial({
-    color: 0x6366f1,
+    color: 0xd55889,
     roughness: 0.2,
     metalness: 0.8
   });
@@ -52,7 +54,7 @@ function initThreeJSSetup() {
   ring1.rotation.x = Math.PI / 3;
 
   const torusMat2 = new THREE.MeshStandardMaterial({
-    color: 0x14b8a6,
+    color: 0xeb6a7c,
     roughness: 0.2,
     metalness: 0.8
   });
@@ -61,23 +63,24 @@ function initThreeJSSetup() {
 
   nucleusGroup.add(ring1, ring2);
 
-  // Core Sphere (#38b6ff Emissive)
+  // Core Sphere (#ffcd62 Emissive)
   const coreGeom = new THREE.SphereGeometry(1.5, 32, 32);
   const coreMat = new THREE.MeshStandardMaterial({
-    color: 0x38b6ff,
-    emissive: 0x38b6ff,
+    color: 0xffcd62,
+    emissive: 0xffcd62,
     emissiveIntensity: 0.5,
     roughness: 0.1
   });
   const coreMesh = new THREE.Mesh(coreGeom, coreMat);
   nucleusGroup.add(coreMesh);
 
+  // Position Nucleus near Hero section
   nucleusGroup.position.set(4, 1, 3);
   nucleusGroup.scale.set(1.1, 1.1, 1.1);
   scene.add(nucleusGroup);
 
-  // 4. Instanced Meshes System (Option 1 Tech Blue Spectrum Palette)
-  const instanceCount = 121; // 11x11 Grid Matrix
+  // 4. Instanced Meshes System using Paleta_1 (#d55889, #eb6a7c, #ff7c6e, #ff9668, #ffcd62)
+  const instanceCount = 121; // 11x11 Matrix Grid
   const geom = new THREE.OctahedronGeometry(0.5, 0);
   const mat = new THREE.MeshStandardMaterial({
     color: 0xffffff,
@@ -88,7 +91,7 @@ function initThreeJSSetup() {
 
   const dummy = new THREE.Object3D();
   const colorHelper = new THREE.Color();
-  const paletteHex = [0x6366f1, 0x14b8a6, 0x3b82f6, 0x1ca7ec, 0x00f5ff];
+  const paletteHex = [0xd55889, 0xeb6a7c, 0xff7c6e, 0xff9668, 0xffcd62];
 
   const proxies = [];
   const cols = 11;
@@ -147,7 +150,7 @@ function initThreeJSSetup() {
     if (instancedMesh.instanceColor) instancedMesh.instanceColor.needsUpdate = true;
   }
 
-  // 5. Anime.js Stagger Animations (Option 1 Color Wave)
+  // 5. Anime.js Stagger Animations (Paleta_1 Color Wave)
   anime({
     targets: proxies,
     y: function(target, index) {
@@ -167,30 +170,30 @@ function initThreeJSSetup() {
   });
 
   // Color Morphing Stagger Wave
-  const colIndigo = new THREE.Color(0x6366f1);
-  const colTeal = new THREE.Color(0x14b8a6);
-  const colSky = new THREE.Color(0x38b6ff);
-  const colCyan = new THREE.Color(0x00f5ff);
+  const colRose = new THREE.Color(0xd55889);
+  const colCoral = new THREE.Color(0xeb6a7c);
+  const colPeach = new THREE.Color(0xff9668);
+  const colGold = new THREE.Color(0xffcd62);
 
   anime({
     targets: proxies,
     r: [
-      { value: colIndigo.r, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colTeal.r, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colSky.r, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colCyan.r, duration: 3000, easing: 'easeInOutQuad' }
+      { value: colRose.r, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colCoral.r, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colPeach.r, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colGold.r, duration: 3000, easing: 'easeInOutQuad' }
     ],
     g: [
-      { value: colIndigo.g, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colTeal.g, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colSky.g, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colCyan.g, duration: 3000, easing: 'easeInOutQuad' }
+      { value: colRose.g, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colCoral.g, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colPeach.g, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colGold.g, duration: 3000, easing: 'easeInOutQuad' }
     ],
     b: [
-      { value: colIndigo.b, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colTeal.b, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colSky.b, duration: 3000, easing: 'easeInOutQuad' },
-      { value: colCyan.b, duration: 3000, easing: 'easeInOutQuad' }
+      { value: colRose.b, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colCoral.b, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colPeach.b, duration: 3000, easing: 'easeInOutQuad' },
+      { value: colGold.b, duration: 3000, easing: 'easeInOutQuad' }
     ],
     delay: anime.stagger(35, { grid: [11, 11], from: 'first' }),
     direction: 'alternate',
@@ -212,9 +215,11 @@ function initThreeJSSetup() {
     requestAnimationFrame(animateScene);
     const elapsedTime = clock.getElapsedTime();
 
+    // Rotate Nucleus
     nucleusGroup.rotation.x = elapsedTime * 0.2;
     nucleusGroup.rotation.y = elapsedTime * 0.3;
 
+    // Smooth Camera Parallax
     camera.position.x += (mouseX * 2.5 - camera.position.x) * 0.05;
     camera.position.y += (-mouseY * 2.5 - camera.position.y) * 0.05;
     camera.lookAt(0, 0, 0);
@@ -232,4 +237,5 @@ function initThreeJSSetup() {
   });
 }
 
+// Auto-run when DOM ready
 document.addEventListener('DOMContentLoaded', initThreeJSSetup);
