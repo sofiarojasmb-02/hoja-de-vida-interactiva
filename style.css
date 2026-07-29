@@ -1709,3 +1709,38 @@ a.hero-contact-btn:hover {
 .pillar-card:hover h4 {
   color: var(--warm-gold) !important;
 }
+
+
+/* ==========================================================================
+   DESKTOP (PC) COMPREHENSIVE 3D VOLUME & GLASSMORPHISM ENHANCEMENTS
+   ========================================================================== */
+
+/* 3D Depth for Hero Contact Buttons on PC */
+.hero-contact-btn {
+  border-bottom: 3px solid var(--rose-magenta) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 3px 0 rgba(213, 88, 137, 0.3) !important;
+  transform-style: preserve-3d;
+}
+
+a.hero-contact-btn:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  border-color: var(--warm-coral) !important;
+  border-bottom-color: var(--warm-gold) !important;
+  box-shadow: 0 12px 28px rgba(213, 88, 137, 0.4), 0 5px 0 var(--warm-coral) !important;
+}
+
+/* 3D Depth & Light Polish for Main Cards on PC */
+.about-card, .timeline-card, .education-card, .contact-card {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid rgba(213, 88, 137, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 3px 0 rgba(213, 88, 137, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.about-card:hover, .timeline-card:hover, .education-card:hover, .contact-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--warm-coral);
+  border-bottom-color: var(--warm-gold);
+  box-shadow: 0 16px 32px rgba(213, 88, 137, 0.35), 0 5px 0 var(--warm-coral);
+}
