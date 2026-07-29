@@ -201,13 +201,30 @@ function initThreeJSSetup() {
     update: commit3DChanges
   });
 
-  // Mouse Parallax Effect
+  // Mouse & Touch Parallax Effect
   let mouseX = 0;
   let mouseY = 0;
+
+  function updateInputPos(clientX, clientY) {
+    mouseX = (clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (clientY / window.innerHeight - 0.5) * 2;
+  }
+
   window.addEventListener('pointermove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    updateInputPos(e.clientX, e.clientY);
   });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      updateInputPos(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      updateInputPos(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
 
   // Render Loop
   const clock = new THREE.Clock();

@@ -287,39 +287,55 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(animateParticles);
 
-  document.addEventListener('pointermove', (e) => {
-    if (e.pointerType === 'mouse') {
-      if (cursorGlow && !isGlowActive) {
-        cursorGlow.style.opacity = '1';
-        isGlowActive = true;
-      }
-      targetX = e.clientX;
-      targetY = e.clientY;
-
-      if (!isMovingGlow) {
-        currentX = targetX;
-        currentY = targetY;
-        isMovingGlow = true;
-        updateGlowPosition();
-      }
-
-      const px = mouse.x ?? e.clientX;
-      const py = mouse.y ?? e.clientY;
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      mouse.active = true;
-
-      const speedX = e.clientX - px;
-      const speedY = e.clientY - py;
-      const speed = Math.hypot(speedX, speedY);
-
-      const numToSpawn = Math.min(3, Math.floor(speed / 6) + 1);
-      for (let i = 0; i < numToSpawn; i++) {
-        const randomColor = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
-        particles.push(new Particle(e.clientX, e.clientY, speedX * 0.12, speedY * 0.12, randomColor));
-      }
+  function handlePointerOrTouch(clientX, clientY, movementX = 0, movementY = 0) {
+    if (cursorGlow && !isGlowActive) {
+      cursorGlow.style.opacity = '1';
+      isGlowActive = true;
     }
+    targetX = clientX;
+    targetY = clientY;
+
+    if (!isMovingGlow) {
+      currentX = targetX;
+      currentY = targetY;
+      isMovingGlow = true;
+      updateGlowPosition();
+    }
+
+    const px = mouse.x ?? clientX;
+    const py = mouse.y ?? clientY;
+    mouse.x = clientX;
+    mouse.y = clientY;
+    mouse.active = true;
+
+    const speedX = movementX || (clientX - px);
+    const speedY = movementY || (clientY - py);
+    const speed = Math.hypot(speedX, speedY);
+
+    const numToSpawn = Math.min(4, Math.floor(speed / 4) + 1);
+    for (let i = 0; i < numToSpawn; i++) {
+      const randomColor = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+      particles.push(new Particle(clientX, clientY, speedX * 0.15, speedY * 0.15, randomColor));
+    }
+  }
+
+  document.addEventListener('pointermove', (e) => {
+    handlePointerOrTouch(e.clientX, e.clientY, e.movementX, e.movementY);
   });
+
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      handlePointerOrTouch(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      handlePointerOrTouch(touch.clientX, touch.clientY);
+    }
+  }, { passive: true });
 });
 
 // Helper function to switch main project image when clicking mini thumbnails
