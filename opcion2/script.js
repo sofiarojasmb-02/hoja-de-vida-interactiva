@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const typewriterElement = document.getElementById('typewriter');
   if (typewriterElement) {
     const phrases = [
-      'Ingeniera Física & Creadora WEB',
+      'Ingeniera Física y Creadora WEB',
       'Especialista en Gestión de la Innovación',
-      'Desarrolladora de Apps WEB & AR 3D',
+      'Desarrolladora de Apps WEB y AR 3D',
       'Líder de Proyectos FabLab UNAL'
     ];
     let phraseIndex = 0;
