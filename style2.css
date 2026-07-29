@@ -1900,3 +1900,39 @@ a.hero-contact-btn:hover {
     border-radius: 16px !important;
   }
 }
+
+
+/* ==========================================================================
+   MOBILE-ONLY PHOTO CENTERING & ENLARGEMENT (DOES NOT AFFECT PC DESKTOP)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .hero-image-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 24px auto 12px auto !important;
+  }
+
+  .hero-image-wrapper {
+    width: min(350px, 85vw) !important;
+    height: min(350px, 85vw) !important;
+    margin: 0 auto !important;
+    box-shadow: 0 12px 30px rgba(213, 88, 137, 0.4) !important;
+  }
+
+  .hero-img-badge {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: -18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image-wrapper {
+    width: min(320px, 88vw) !important;
+    height: min(320px, 88vw) !important;
+    margin: 0 auto !important;
+  }
+}
