@@ -1356,3 +1356,70 @@ main, header, footer {
     height: 180px;
   }
 }
+
+
+/* ==========================================================================
+   HERO QUICK CONTACT CHIPS (COMPACT MOBILE & DESKTOP DESIGN)
+   ========================================================================== */
+
+.hero-quick-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--border-radius-full);
+  background: rgba(24, 15, 36, 0.7);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.contact-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--rose-magenta);
+  background: rgba(213, 88, 137, 0.15);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(213, 88, 137, 0.3);
+}
+
+.chip-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.chip-icon.coral { color: var(--warm-coral); }
+.chip-icon.rose { color: var(--rose-magenta); }
+.chip-icon.gold { color: var(--warm-gold); }
+.chip-icon.peach { color: var(--peach-amber); }
+
+@media (max-width: 768px) {
+  .hero-quick-contacts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .contact-chip {
+    padding: 7px 10px;
+    font-size: 0.76rem;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
