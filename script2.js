@@ -443,3 +443,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+// ==========================================================================
+// UNIVERSAL IMAGE LIGHTBOX ENLARGER LOGIC
+// ==========================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const lightboxModal = document.getElementById('image-lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxOverlay = document.querySelector('.lightbox-overlay');
+
+  function openLightbox(src, altText) {
+    if (lightboxModal && lightboxImg) {
+      lightboxImg.src = src;
+      lightboxTitle.textContent = altText || 'Vista Ampliada del Proyecto';
+      lightboxModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeLightbox() {
+    if (lightboxModal) {
+      lightboxModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Global Click Listener for Images
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target.tagName === 'IMG' && (
+      target.classList.contains('hologram-img') ||
+      target.classList.contains('summary-img') ||
+      target.classList.contains('hero-img') ||
+      target.classList.contains('game-card-img') ||
+      target.closest('.item-graphic-preview') ||
+      target.closest('.summary-img-wrapper') ||
+      target.closest('.hologram-media-frame')
+    )) {
+      e.preventDefault();
+      const altText = target.alt || target.getAttribute('data-title') || 'Vista Ampliada de Imagen';
+      openLightbox(target.src, altText);
+    }
+  });
+});
