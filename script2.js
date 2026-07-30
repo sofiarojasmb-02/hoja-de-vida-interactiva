@@ -390,3 +390,56 @@ function changeProjectImg(thumbElem, imgUrl) {
     thumbElem.classList.add('active');
   }
 }
+
+
+// ==========================================================================
+// ALIEN UFO HOLOGRAM IMAGE SWITCHER & CATEGORY FILTERING
+// ==========================================================================
+
+window.switchHoloImg = function(imgId, newSrc, btnElement) {
+  const targetImg = document.getElementById(imgId);
+  if (targetImg) {
+    targetImg.style.opacity = '0.2';
+    targetImg.style.filter = 'drop-shadow(0 0 25px #00f0ff) brightness(1.4)';
+    setTimeout(() => {
+      targetImg.src = newSrc;
+      targetImg.style.opacity = '1';
+      targetImg.style.filter = 'drop-shadow(0 0 10px rgba(0, 240, 255, 0.4)) contrast(1.08) brightness(1.05)';
+    }, 200);
+  }
+  if (btnElement && btnElement.parentElement) {
+    btnElement.parentElement.querySelectorAll('.holo-thumb-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ufoFilterBtns = document.querySelectorAll('.ufo-filters .filter-btn');
+  const holoCards = document.querySelectorAll('.hologram-project-card');
+
+  ufoFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      ufoFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-project-filter');
+
+      holoCards.forEach(card => {
+        const category = card.getAttribute('data-project-cat');
+        if (filterVal === 'all' || filterVal === category) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+});

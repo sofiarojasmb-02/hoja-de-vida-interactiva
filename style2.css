@@ -2821,3 +2821,373 @@ a.hero-contact-btn:hover {
     gap: 40px;
   }
 }
+
+
+/* ==========================================================================
+   ALIEN UFO SPACESHIP HOLOGRAM PROJECTOR PORTFOLIO
+   ========================================================================== */
+
+.ufo-portfolio-section {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.08) 0%, rgba(13, 8, 20, 0.95) 70%);
+}
+
+/* Section Pretitle Badge */
+.ufo-section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-family-title);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 16px;
+  border-radius: var(--border-radius-full);
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+  margin-bottom: 14px;
+}
+
+.ufo-title {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+/* UFO Emitter Container */
+.ufo-emitter-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0 10px 0;
+  width: 100%;
+}
+
+/* UFO Spaceship Graphic */
+.ufo-spaceship {
+  position: relative;
+  width: 220px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 12;
+  animation: ufoHoverFloat 4s infinite ease-in-out;
+}
+
+@keyframes ufoHoverFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1.5deg); }
+}
+
+/* Glass Cockpit Dome */
+.ufo-dome {
+  width: 90px;
+  height: 45px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(0, 240, 255, 0.8) 40%, rgba(213, 88, 137, 0.9) 100%);
+  border-radius: 45px 45px 0 0;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.8), inset 0 2px 10px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: -10px;
+}
+
+/* Saucer Body */
+.ufo-body {
+  position: relative;
+  width: 220px;
+  height: 45px;
+  background: linear-gradient(180deg, #3d2b56 0%, #170d28 50%, #0d0618 100%);
+  border-radius: 50px;
+  border: 2px solid rgba(0, 240, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LED Thruster Lights Ring */
+.ufo-ring {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.ufo-led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+  animation: ledPulse 1.5s infinite alternate;
+}
+
+.ufo-led.led-cyan { color: #00f0ff; background: #00f0ff; }
+.ufo-led.led-rose { color: #d55889; background: #d55889; animation-delay: 0.3s; }
+.ufo-led.led-gold { color: #ffcd62; background: #ffcd62; animation-delay: 0.6s; }
+
+@keyframes ledPulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px currentColor; }
+}
+
+/* Bottom Plasma Thruster Emitter */
+.ufo-thruster {
+  width: 60px;
+  height: 14px;
+  background: linear-gradient(180deg, #00f0ff 0%, #d55889 100%);
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 0 25px #00f0ff, 0 0 40px #d55889;
+  margin-top: -4px;
+  z-index: 11;
+}
+
+/* Hologram Light Cone Beam */
+.ufo-hologram-beam {
+  position: absolute;
+  top: 75px;
+  width: 90%;
+  max-width: 1100px;
+  height: 480px;
+  background: linear-gradient(180deg, 
+    rgba(0, 240, 255, 0.4) 0%, 
+    rgba(213, 88, 137, 0.2) 30%, 
+    rgba(0, 240, 255, 0.06) 75%, 
+    transparent 100%);
+  clip-path: polygon(44% 0%, 56% 0%, 100% 100%, 0% 100%);
+  pointer-events: none;
+  z-index: 5;
+  animation: beamPulse 3s infinite alternate ease-in-out;
+}
+
+@keyframes beamPulse {
+  0% { opacity: 0.7; transform: scaleX(0.98); }
+  100% { opacity: 1; transform: scaleX(1.02); filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.5)); }
+}
+
+/* Beam Scanline Laser Sweep */
+.beam-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #00f0ff, #ffffff, #00f0ff, transparent);
+  box-shadow: 0 0 15px #00f0ff;
+  animation: scanlineDown 3.5s infinite linear;
+}
+
+@keyframes scanlineDown {
+  0% { top: 0%; opacity: 0.8; }
+  100% { top: 100%; opacity: 0.1; }
+}
+
+/* Hologram Projects Grid Layout */
+.hologram-projects-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  width: 100%;
+  z-index: 10;
+  margin-top: 20px;
+}
+
+/* Holographic Card Display Frame */
+.hologram-project-card {
+  position: relative;
+  padding: 24px;
+  background: rgba(15, 9, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-bottom: 4px solid #00f0ff;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 
+              0 0 25px rgba(0, 240, 255, 0.25), 
+              inset 0 0 20px rgba(213, 88, 137, 0.2);
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease, 
+              border-color 0.4s ease;
+  overflow: hidden;
+}
+
+/* Hologram Grid Background Effect */
+.hologram-project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hologram Hover Elevation & Neon Flare */
+.hologram-project-card:hover {
+  transform: translateY(-10px) rotateX(4deg) scale(1.02);
+  border-color: #00f0ff;
+  border-bottom-color: #ffcd62;
+  box-shadow: 0 20px 45px rgba(0, 240, 255, 0.45), 
+              0 0 35px rgba(213, 88, 137, 0.5), 
+              inset 0 0 25px rgba(0, 240, 255, 0.4);
+}
+
+/* Hologram Card Media Screen */
+.hologram-media-frame {
+  position: relative;
+  width: 100%;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  z-index: 2;
+  background: #05030a;
+}
+
+/* Hologram Image Filter Effect */
+.hologram-img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4)) contrast(1.08) brightness(1.05);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.hologram-project-card:hover .hologram-img {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.8)) contrast(1.15) brightness(1.1);
+}
+
+/* Hologram Laser Scanline Overlay on Image */
+.hologram-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    rgba(0, 240, 255, 0.15) 0%, 
+    transparent 20%, 
+    rgba(213, 88, 137, 0.15) 50%, 
+    transparent 80%, 
+    rgba(0, 240, 255, 0.15) 100%);
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: screen;
+}
+
+/* Hologram Corner HUD Lights */
+.hologram-hud-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(5, 3, 10, 0.85);
+  border: 1px solid #00f0ff;
+  color: #00f0ff;
+  font-family: var(--font-family-title);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+  z-index: 4;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+}
+
+/* Hologram Card Text Content */
+.hologram-card-body {
+  position: relative;
+  z-index: 2;
+  margin-top: 18px;
+}
+
+.hologram-card-title {
+  font-family: var(--font-family-title);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  margin-bottom: 8px;
+}
+
+.hologram-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* Tech Stack Tags */
+.hologram-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.holo-tech-chip {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+}
+
+/* Interactive Switcher Buttons */
+.hologram-thumb-switcher {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.holo-thumb-btn {
+  padding: 5px 12px;
+  border-radius: var(--border-radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.holo-thumb-btn.active, .holo-thumb-btn:hover {
+  background: #00f0ff;
+  color: #05030a;
+  border-color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+@media (max-width: 992px) {
+  .hologram-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .ufo-hologram-beam {
+    height: 380px;
+  }
+  .ufo-spaceship {
+    width: 180px;
+    height: 75px;
+  }
+  .ufo-dome {
+    width: 75px;
+    height: 36px;
+  }
+  .ufo-body {
+    width: 180px;
+    height: 36px;
+  }
+}
