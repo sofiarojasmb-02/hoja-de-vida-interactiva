@@ -2286,3 +2286,255 @@ a.hero-contact-btn:hover {
   align-items: center;
   gap: 6px;
 }
+
+
+/* ==========================================================================
+   GAME DEV STUDIO 04 "OUR GAME PROJECTS" PORTFOLIO STYLES
+   ========================================================================== */
+
+.game-portfolio-section {
+  position: relative;
+  background: linear-gradient(180deg, rgba(13, 8, 20, 0.98) 0%, rgba(20, 12, 30, 0.95) 100%);
+  border-top: 1px solid var(--border-color);
+}
+
+.game-section-tag {
+  display: inline-block;
+  font-family: var(--font-family-title);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--rose-magenta);
+  background: rgba(213, 88, 137, 0.15);
+  border: 1px solid rgba(213, 88, 137, 0.35);
+  padding: 6px 16px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(213, 88, 137, 0.2);
+}
+
+.game-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--warm-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.game-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.game-filters .filter-btn {
+  font-family: var(--font-family-title);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 10px 22px;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--border-color);
+  background: rgba(24, 15, 36, 0.7);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(8px);
+}
+
+.game-filters .filter-btn:hover,
+.game-filters .filter-btn.active {
+  background: var(--gradient-brand) !important;
+  color: #ffffff !important;
+  border-color: var(--rose-magenta) !important;
+  box-shadow: 0 4px 20px rgba(213, 88, 137, 0.45);
+  transform: translateY(-2px);
+}
+
+/* 2-Column Responsive Grid */
+.game-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 32px;
+}
+
+.game-project-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, rgba(26, 16, 40, 0.9), rgba(14, 8, 22, 0.95));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(213, 88, 137, 0.25);
+  border-bottom: 4px solid var(--rose-magenta);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-project-card:hover {
+  transform: translateY(-10px) scale(1.015);
+  border-color: var(--warm-coral);
+  border-bottom-color: var(--warm-gold);
+  box-shadow: 0 22px 45px rgba(213, 88, 137, 0.45), 0 0 25px rgba(255, 124, 110, 0.2);
+}
+
+.game-card-media {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  background: rgba(10, 5, 18, 0.85);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.game-badge {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-full);
+  z-index: 15;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.badge-rose {
+  background: rgba(213, 88, 137, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-gold {
+  background: rgba(255, 205, 98, 0.85);
+  color: #120a1c;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.badge-peach {
+  background: rgba(255, 150, 104, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-coral {
+  background: rgba(255, 124, 110, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Image Thumbnail Switcher Buttons */
+.game-thumb-switcher {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.thumb-btn {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: var(--border-radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.thumb-btn:hover, .thumb-btn.active {
+  background: var(--rose-magenta);
+  color: #ffffff;
+  border-color: var(--warm-coral);
+  box-shadow: 0 2px 10px rgba(213, 88, 137, 0.5);
+}
+
+.game-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.game-index-tag {
+  font-family: var(--font-family-title);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--warm-coral);
+  margin-bottom: 8px;
+}
+
+.game-card-title {
+  font-family: var(--font-family-title);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  transition: color var(--transition-fast);
+}
+
+.game-project-card:hover .game-card-title {
+  color: var(--warm-gold);
+}
+
+.game-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.game-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+  margin-top: auto;
+}
+
+.tech-chip {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--border-radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.game-card-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.game-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--rose-magenta);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.game-card-btn:hover {
+  color: var(--warm-gold);
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .game-projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

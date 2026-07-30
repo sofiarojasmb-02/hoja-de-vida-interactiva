@@ -121,7 +121,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5b. Copy to Clipboard Buttons (Email & Phone in References)
+  // 5b. Game Dev Studio Project Category Filters
+  const gameFilterBtns = document.querySelectorAll('.game-filters .filter-btn');
+  const gameCards = document.querySelectorAll('.game-project-card');
+
+  gameFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      gameFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filterVal = btn.getAttribute('data-project-filter');
+
+      gameCards.forEach(card => {
+        const cat = card.getAttribute('data-project-cat');
+        if (filterVal === 'all' || filterVal === cat) {
+          card.style.display = 'flex';
+          setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          setTimeout(() => { card.style.display = 'none'; }, 300);
+        }
+      });
+    });
+  });
+
+  // Global Image Switcher for Game Dev Studio Cards
+  window.switchGameImg = function(imgId, newSrc, btnElement) {
+    const targetImg = document.getElementById(imgId);
+    if (targetImg) {
+      targetImg.style.opacity = '0.3';
+      setTimeout(() => {
+        targetImg.src = newSrc;
+        targetImg.style.opacity = '1';
+      }, 150);
+    }
+    if (btnElement && btnElement.parentElement) {
+      btnElement.parentElement.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+    }
+  };
+
+  // 5c. Copy to Clipboard Buttons (Email & Phone in References)
   document.querySelectorAll('.btn-copy').forEach(btn => {
     btn.addEventListener('click', () => {
       const textToCopy = btn.getAttribute('data-copy');
