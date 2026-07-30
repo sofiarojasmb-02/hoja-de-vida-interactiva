@@ -395,6 +395,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Helper function to switch image inside Phone/PC mockup frames when clicking mini thumbnails
+function switchMockupImg(thumbElem, imgUrl) {
+  const card = thumbElem.closest('.phone-carousel-card');
+  if (card) {
+    const targetImg = card.querySelector('.preview-target');
+    if (targetImg) targetImg.src = imgUrl;
+
+    card.querySelectorAll('.mini-thumb').forEach(t => t.classList.remove('active'));
+    thumbElem.classList.add('active');
+  }
+}
+
 // Helper function to switch main project image when clicking mini thumbnails
 function changeProjectImg(thumbElem, imgUrl) {
   const card = thumbElem.closest('.project-card');
