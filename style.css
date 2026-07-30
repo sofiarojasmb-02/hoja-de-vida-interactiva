@@ -2156,3 +2156,92 @@ a.hero-contact-btn:hover {
     border-radius: 34px;
   }
 }
+
+
+/* ==========================================================================
+   UNIVERSAL MENU DRAWER & DARK MODE LOCK (DESKTOP & MOBILE)
+   ========================================================================== */
+
+/* Lock html to dark theme */
+:root, html {
+  color-scheme: dark !important;
+}
+
+.nav-container {
+  position: relative;
+}
+
+/* Hide default horizontal nav menu display on desktop */
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 24px;
+  background: rgba(18, 10, 28, 0.95) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius-lg) !important;
+  padding: 16px 20px !important;
+  display: none !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  min-width: 220px !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(213, 88, 137, 0.25) !important;
+  z-index: 999 !important;
+}
+
+.nav-menu.active {
+  display: flex !important;
+  animation: menuFadeIn 0.25s ease-out !important;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nav-menu .nav-link {
+  padding: 10px 16px !important;
+  border-radius: var(--border-radius-sm) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  transition: all var(--transition-fast) !important;
+  display: block !important;
+}
+
+.nav-menu .nav-link:hover {
+  background: rgba(213, 88, 137, 0.2) !important;
+  color: var(--rose-magenta) !important;
+  transform: translateX(5px) !important;
+}
+
+.btn-menu-drawer {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  z-index: 105 !important;
+}
+
+.btn-menu-drawer.active {
+  background: var(--rose-magenta) !important;
+  color: #ffffff !important;
+  border-color: var(--warm-coral) !important;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    right: 16px !important;
+    left: 16px !important;
+    width: auto !important;
+  }
+}

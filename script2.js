@@ -50,35 +50,53 @@ document.addEventListener('DOMContentLoaded', () => {
     typeEffect();
   }
 
-  // 3. Theme Toggle (Dark / Light)
-  const themeToggleBtn = document.getElementById('theme-toggle');
+  // 3. Permanent Dark Theme Lock
   const htmlElement = document.documentElement;
+  htmlElement.setAttribute('data-theme', 'dark');
 
-  const savedTheme = localStorage.getItem('theme-v2') || 'dark';
-  htmlElement.setAttribute('data-theme', savedTheme);
-
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      htmlElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme-v2', newTheme);
-    });
-  }
-
-  // 4. Mobile Navigation Menu Toggle
+  // 4. Universal Navigation Menu Drawer Toggle (Desktop & Mobile)
   const menuToggleBtn = document.getElementById('menu-toggle');
   const navMenu = document.getElementById('nav-menu');
 
   if (menuToggleBtn && navMenu) {
-    menuToggleBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
+    const iconMenu = menuToggleBtn.querySelector('.icon-menu');
+    const iconClose = menuToggleBtn.querySelector('.icon-close');
 
+    function toggleMenu(e) {
+      if (e) e.stopPropagation();
+      const isActive = navMenu.classList.toggle('active');
+      menuToggleBtn.classList.toggle('active', isActive);
+
+      if (iconMenu && iconClose) {
+        iconMenu.style.display = isActive ? 'none' : 'inline-block';
+        iconClose.style.display = isActive ? 'inline-block' : 'none';
+      }
+    }
+
+    menuToggleBtn.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking any nav link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        menuToggleBtn.classList.remove('active');
+        if (iconMenu && iconClose) {
+          iconMenu.style.display = 'inline-block';
+          iconClose.style.display = 'none';
+        }
       });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
+        menuToggleBtn.classList.remove('active');
+        if (iconMenu && iconClose) {
+          iconMenu.style.display = 'inline-block';
+          iconClose.style.display = 'none';
+        }
+      }
     });
   }
 
