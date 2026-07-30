@@ -50,53 +50,35 @@ document.addEventListener('DOMContentLoaded', () => {
     typeEffect();
   }
 
-  // 3. Permanent Dark Theme Lock
+  // 3. Theme Toggle (Dark / Light)
+  const themeToggleBtn = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
-  htmlElement.setAttribute('data-theme', 'dark');
 
-  // 4. Universal Navigation Menu Drawer Toggle (Desktop & Mobile)
+  const savedTheme = localStorage.getItem('theme-v2') || 'dark';
+  htmlElement.setAttribute('data-theme', savedTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      htmlElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme-v2', newTheme);
+    });
+  }
+
+  // 4. Mobile Navigation Menu Toggle
   const menuToggleBtn = document.getElementById('menu-toggle');
   const navMenu = document.getElementById('nav-menu');
 
   if (menuToggleBtn && navMenu) {
-    const iconMenu = menuToggleBtn.querySelector('.icon-menu');
-    const iconClose = menuToggleBtn.querySelector('.icon-close');
+    menuToggleBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
 
-    function toggleMenu(e) {
-      if (e) e.stopPropagation();
-      const isActive = navMenu.classList.toggle('active');
-      menuToggleBtn.classList.toggle('active', isActive);
-
-      if (iconMenu && iconClose) {
-        iconMenu.style.display = isActive ? 'none' : 'inline-block';
-        iconClose.style.display = isActive ? 'inline-block' : 'none';
-      }
-    }
-
-    menuToggleBtn.addEventListener('click', toggleMenu);
-
-    // Close menu when clicking any nav link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
-        menuToggleBtn.classList.remove('active');
-        if (iconMenu && iconClose) {
-          iconMenu.style.display = 'inline-block';
-          iconClose.style.display = 'none';
-        }
       });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!navMenu.contains(e.target) && !menuToggleBtn.contains(e.target)) {
-        navMenu.classList.remove('active');
-        menuToggleBtn.classList.remove('active');
-        if (iconMenu && iconClose) {
-          iconMenu.style.display = 'inline-block';
-          iconClose.style.display = 'none';
-        }
-      }
     });
   }
 
@@ -394,18 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-// Helper function to switch image inside Phone/PC mockup frames when clicking mini thumbnails
-function switchMockupImg(thumbElem, imgUrl) {
-  const card = thumbElem.closest('.phone-carousel-card');
-  if (card) {
-    const targetImg = card.querySelector('.preview-target');
-    if (targetImg) targetImg.src = imgUrl;
-
-    card.querySelectorAll('.mini-thumb').forEach(t => t.classList.remove('active'));
-    thumbElem.classList.add('active');
-  }
-}
 
 // Helper function to switch main project image when clicking mini thumbnails
 function changeProjectImg(thumbElem, imgUrl) {
